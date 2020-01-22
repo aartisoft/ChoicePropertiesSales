@@ -113,12 +113,16 @@ public class LoginScreen extends AppCompatActivity {
                 if (dataSnapshot.getValue() != null) {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                        User upload = postSnapshot.getValue(User.class);
+                        User user = postSnapshot.getValue(User.class);
 
                         progressDialog.dismissDialog();
-                        String userid = upload.getUserId();
+                        String userid = user.getUserId();
+                        appSharedPreference.createUserLoginSession();
+                        appSharedPreference.addUserDetails(user);
                         Toast.makeText(LoginScreen.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                        signInUserData(userid);
+                        LoginToApp();
+
+                        //                        signInUserData(userid);
 
                     }
 
@@ -177,41 +181,6 @@ public class LoginScreen extends AppCompatActivity {
     }
 
 
-    public void login() {
-        if (!Utility.isNetworkConnected(this)) {
-            Utility.showMessage(this, this.getString(R.string.network_not_available));
-            return;
-        }
-        final String mobileNumber = etMobileNumber.getText().toString();
-        final String password = etpassword.getText().toString();
-        if (validate(mobileNumber, password)) {
-            if (!Utility.isNetworkConnected(this)) {
-                Utility.showMessage(this, this.getString(R.string.network_not_available));
-                return;
-            }
-            progressDialog = new ProgressDialogClass(this);
-            progressDialog.showDialog(this.getString(R.string.SIGNING_IN), this.getString(R.string.PLEASE_WAIT));
-//            userRepository.signIn(mobileNumber, password, new CallBack() {
-//                @Override
-//                public void onSuccess(Object object) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    FirebaseUser userFirebase = Constant.AUTH.getCurrentUser();
-//                    if (userFirebase != null) {
-//                        signInUserData(userFirebase.getUid());
-//
-//                    }
-//                }
-//
-//                @Override
-//                public void onError(Object object) {
-//                    if (progressDialog != null)
-//                        progressDialog.dismissDialog();
-//                    Utility.showSnackBar(activity, etpassword, getMessage(R.string.login_fail_try_again));
-//                }
-//            });
-        }
-    }
-
     private void signInUserData(final String userId) {
         userRepository.readUserByUserId(userId, new CallBack() {
             @Override
@@ -222,6 +191,7 @@ public class LoginScreen extends AppCompatActivity {
                     appSharedPreference.addUserDetails(user);
 
                     String roll = appSharedPreference.getRole();
+                    LoginToApp();
 
 
                 } else {
@@ -238,6 +208,12 @@ public class LoginScreen extends AppCompatActivity {
                 Utility.showTimedSnackBar(activity, etpassword, getMessage(R.string.login_fail_try_again));
             }
         });
+    }
+
+    private void LoginToApp() {
+        Intent intent = new Intent(this, Main2Activity.class);
+        startActivity(intent);
+        finish();
     }
 
     private String getMessage(int id) {

@@ -44,10 +44,9 @@ dependencies {
 
     implementation 'com.theartofdev.edmodo:android-image-cropper:1.2.1'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
-    implementation project(':customnavigationdrawer')
     implementation 'com.stone.vega.library:VegaLayoutManager:1.0.6'
     implementation 'commons-io:commons-io:+'
-
+    implementation project(':customnavigationdrawer2')
 
     configurations.matching { it.name == '_internal_aapt2_binary' }.all { config ->
         config.resolutionStrategy.eachDependency { details ->

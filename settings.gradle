@@ -1,2 +1,2 @@
-include ':app', ':customnavigationdrawer'
+include ':app', ':customnavigationdrawer2'
 rootProject.name='Choice Properties'
