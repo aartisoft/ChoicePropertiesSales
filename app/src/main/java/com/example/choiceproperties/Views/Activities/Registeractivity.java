@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.choiceproperties.CallBack.CallBack;
+import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Exception.ExceptionUtil;
 import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.R;
@@ -37,6 +38,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 import java.util.concurrent.TimeUnit;
 
 import static com.example.choiceproperties.Constant.Constant.AGENT_PREFIX;
+import static com.example.choiceproperties.Constant.Constant.SALES_PREFIX;
 
 public class Registeractivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener, View.OnTouchListener, View.OnClickListener {
@@ -140,11 +142,13 @@ public class Registeractivity extends AppCompatActivity implements
 
     private User fillUserModel() {
         User user = new User();
+        user.setUserId(Constant.USER_TABLE_REF.push().getKey());
         user.setUserName(etname.getText().toString());
         user.setMobileNumber(etmobile.getText().toString());
         user.setPassword(etPassword.getText().toString());
-        user.setStatus("Deactive");
-        user.setAgentId(Utility.generateAgentId(AGENT_PREFIX));
+        user.setRole(Constant.ROLE_SALES);
+        user.setStatus(Constant.STATUS_DEACTIVE);
+        user.setAgentId(Utility.generateAgentId(SALES_PREFIX));
 
         return user;
     }

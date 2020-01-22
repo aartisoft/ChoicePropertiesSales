@@ -6,4 +6,6 @@ import com.example.choiceproperties.Models.User;
 public interface UserRepository {
 
     void createUserData(final User userModel, final CallBack callback);
+
+    void readUserByUserId(final String regId, final CallBack callBack);
 }

@@ -6,4 +6,12 @@
 
     <item type="color" name="hederbackground">#1E88E5</item>
     <item type="color" name="white">#ffffff</item>
+
+    <color name="red">#ff6767</color>
+    <color name="orange">#ffb067</color>
+    <color name="green">#67ffae</color>
+    <color name="blue">#6785ff</color>
+    <color name="card_gray">#3b3b3b</color>
+    <color name="card_red">#da5956</color>
+    <color name="card_color">#f6f6f6</color>
 </resources>

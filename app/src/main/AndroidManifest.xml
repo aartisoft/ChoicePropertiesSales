@@ -23,8 +23,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Views.Activities.LoginScreen">
-        </activity>
+        <activity android:name=".Views.Activities.LoginScreen"></activity>
+
+        <activity android:name=".Views.Activities.Registeractivity"></activity>
 
     </application>
 

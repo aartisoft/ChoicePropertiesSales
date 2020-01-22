@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Exception.ExceptionUtil;
 import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.R;
@@ -212,49 +213,31 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     private void signInUserData(final String userId) {
-//        userRepository.readUserByUserId(userId, new CallBack() {
-//            @Override
-//            public void onSuccess(Object object) {
-//                if (object != null) {
-//                    User user = (User) object;
-//                    appSharedPreference.createUserLoginSession();
-//                    appSharedPreference.addUserDetails(user);
-//
-//                    String roll = appSharedPreference.getRole();
-//
-//                    if (roll.equals("ADMIN")) {
-//                        loginToadminApp();
-//
-//                    } else if (roll.equals("TELECALLER")) {
-//                        loginTotellecallerApp();
-//
-//                    } else if (roll.equals("COORDINATOR")) {
-//                        loginTocordinatorApp();
-//
-//                    } else if (roll.equals("SALES")) {
-//                        loginTosalesApp();
-//
-//                    } else if (roll.equals("ACCOUNTANT")) {
-//                        loginToaccountantApp();
-//
-//                    } else if (roll.equals("ADMIN")) {
-//                        loginToadminApp();
-//
-//                    }
-//                } else {
-//                    Utility.showTimedSnackBar(activity, etpassword, getMessage(R.string.login_fail_try_again));
-//                }
-//                if (progressDialog != null)
-//                    progressDialog.dismissDialog();
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
-//                if (progressDialog != null)
-//                    progressDialog.dismissDialog();
-//                Utility.showTimedSnackBar(activity, etpassword, getMessage(R.string.login_fail_try_again));
-//            }
-//        });
+        userRepository.readUserByUserId(userId, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    User user = (User) object;
+                    appSharedPreference.createUserLoginSession();
+                    appSharedPreference.addUserDetails(user);
+
+                    String roll = appSharedPreference.getRole();
+
+
+                } else {
+                    Utility.showTimedSnackBar(activity, etpassword, getMessage(R.string.login_fail_try_again));
+                }
+                if (progressDialog != null)
+                    progressDialog.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                if (progressDialog != null)
+                    progressDialog.dismissDialog();
+                Utility.showTimedSnackBar(activity, etpassword, getMessage(R.string.login_fail_try_again));
+            }
+        });
     }
 
     private String getMessage(int id) {

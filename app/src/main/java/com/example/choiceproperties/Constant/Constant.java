@@ -27,6 +27,7 @@ public class Constant {
     public static final String SUCCESS = "Success";
 
     public static final String AGENT_PREFIX = "AG-";
+    public static final String SALES_PREFIX = "AG-";
     public static final String EMAIL_POSTFIX = "@smartloan.com";
 
     //********************************************STATUS FLEADS*****************************
@@ -43,6 +44,10 @@ public class Constant {
     public static final String DOCUMENTS_PATH = "images/documents";
     public static final String CUSROMER_PROFILE_PATH = "images/customer";
     public static final String IMAGE_URI_LIST = "IMAGE_URI_LIST";
+
+    public static final String ROLE_SALES = "SALES";
+    public static final String STATUS_ACTIVE = "ACTIVE";
+    public static final String STATUS_DEACTIVE = "DEACTIVE";
 
 
 }
