@@ -151,14 +151,8 @@ public class LoginScreen extends AppCompatActivity {
                         if (appSharedPreference.getRegId() != null && appSharedPreference.getUserId() != null) {
 
                             String roll = appSharedPreference.getRole();
-//                            loginTotellecallerApp();
-                            if (roll.equals("ADMIN")) {
-                                loginToadminApp();
 
-                            } else if (roll.equals("SALES")) {
-//                                loginTosalesApp();
-
-                            }
+                            LoginToApp();
                         }
                     }
                 } catch (Exception e) {
@@ -167,19 +161,6 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
     }
-
-    private void loginToadminApp() {
-//        Intent i = new Intent(this, Home_Activity.class);
-//        startActivity(i);
-//        finish();
-    }
-
-    private void loginTotellecallerApp() {
-//        Intent i = new Intent(this, MainActivity_telecaller.class);
-//        startActivity(i);
-//        finish();
-    }
-
 
     private void signInUserData(final String userId) {
         userRepository.readUserByUserId(userId, new CallBack() {
