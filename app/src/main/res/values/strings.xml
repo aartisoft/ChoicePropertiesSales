@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Choice Properties</string>
+
+    <string name="dismiss">dismiss</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="SIGNING_IN">Signing in&#8230;</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="PLEASE_WAIT">Please Wait&#8230;</string>
+    <string name="registration_fail">Registration fail, please try again.</string>
+    <string name="network_not_available">Network not available, please check your network connection.</string>
+    <string name="MOBILE_NUMBER_SHOULD_NOT_BE_EMPTY">Mobile number should not be empty.</string>
+    <string name="MOBILE_NUMBER_ALREADY_REGISTER">Mobile number already register.</string>
+    <string name="INVALID_EMAIL">Invalid Email</string>
+    <string name="INVALID_CHARACTERS">Invalid Characters</string>
+    <string name="PLEASE_ENTER_NAME"> Please enter the name.</string>
+    <string name="INVALID_MOBILE_NUMBER">Invalid mobile number.</string>
+    <string name="MOBILE_NUMBER_SHOULD_BE_10_DIGIT">Mobile number should be 10 digit.</string>
+    <string name="PASSWORD_SHOULD_NOT_BE_EMPTY">Password should not be empty.</string>
+    <string name="phone">Mobile Number</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="file_uploading_progress">Uploading in progress</string>
+    <string name="notification_message">Don\'t close the app.</string>
+
+    <string name="file_uploading_complited">Uploading to server done </string>
+    <string name="file_uploading_complited_message">Total uploaded files :&#160; </string>
+    <string name="data_updation_fails_message">Data updation failed, please try again.</string>
+</resources>
