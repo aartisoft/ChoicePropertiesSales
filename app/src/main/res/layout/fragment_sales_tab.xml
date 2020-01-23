@@ -20,6 +20,7 @@
             app:layout_collapseMode="parallax"
             app:layout_scrollFlags="snap"
             app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/white"
             app:tabGravity="fill"
             app:tabMaxWidth="0dp"
             app:tabMode="fixed" />
