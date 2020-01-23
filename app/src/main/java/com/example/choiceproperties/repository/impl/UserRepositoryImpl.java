@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Exception.ExceptionUtil;
+import com.example.choiceproperties.Models.Customer;
 import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.repository.FirebaseTemplateRepository;
 import com.example.choiceproperties.repository.UserRepository;
@@ -80,6 +81,22 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 callBack.onError(databaseError);
+            }
+        });
+    }
+
+    @Override
+    public void createCustomer(Customer customer, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.CUSTOMERS_TABLE_REF.child(customer.getCustomerId());
+        fireBaseCreate(databaseReference, customer, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
             }
         });
     }

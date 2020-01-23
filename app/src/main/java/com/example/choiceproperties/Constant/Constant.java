@@ -14,6 +14,7 @@ public class Constant {
     public static final DatabaseReference USER_TABLE_REF = DATABASE.getReference("user");
     public static final DatabaseReference LEEDS_TABLE_REF = DATABASE.getReference("leeds");
     public static final DatabaseReference REQUESTS_TABLE_REF = DATABASE.getReference("Request");
+    public static final DatabaseReference CUSTOMERS_TABLE_REF = DATABASE.getReference("Customers");
 
 
     /************************************** Firebase Authentication reference constants ***************************************************************************/
@@ -29,6 +30,7 @@ public class Constant {
 
     public static final String AGENT_PREFIX = "AG-";
     public static final String SALES_PREFIX = "AG-";
+    public static final String CUSTOMER_PREFIX = "CM-";
     public static final String EMAIL_POSTFIX = "@smartloan.com";
 
     //********************************************STATUS FLEADS*****************************

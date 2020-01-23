@@ -3,6 +3,7 @@ package com.example.choiceproperties.repository.impl;
 import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Models.Requests;
+import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.repository.FirebaseTemplateRepository;
 import com.example.choiceproperties.repository.LeedRepository;
 import com.google.firebase.database.DataSnapshot;
@@ -76,5 +77,32 @@ public class LeedRepositoryImpl extends FirebaseTemplateRepository implements Le
     }
 
 
+    @Override
+    public void readSalesPersonByStatus(String status, final CallBack callBack) {
+        final Query query = Constant.USER_TABLE_REF.orderByChild("status").equalTo(status);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<User> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            User leedsModel = suggestionSnapshot.getValue(User.class);
+                            leedsModelArrayList.add(leedsModel);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
 
 }

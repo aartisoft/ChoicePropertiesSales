@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.choiceproperties.R;
+import com.example.choiceproperties.Views.Fragments.Fragment_Add_Customers;
 import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
+import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
@@ -21,7 +23,7 @@ import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity implements OnFragmentInteractionListener {
 
     SNavigationDrawer sNavigationDrawer;
     int color1=0;
@@ -51,15 +53,15 @@ public class Main2Activity extends AppCompatActivity {
         menuItems.add(new MenuItem("Accept Sales Requests",R.color.Black));
         menuItems.add(new MenuItem("Log Out",R.color.Black));
         sNavigationDrawer.setMenuItemList(menuItems);
-//        fragmentClass =  Fragment_ViewCatalogs.class;
+        fragmentClass =  Sales_Customer_Requests_Fragment.class;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
         if (fragment != null) {
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).replace(R.id.frameLayout, fragment).commit();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out).replace(R.id.frameLayout, fragment).commit();
         }
 
 
@@ -76,13 +78,13 @@ public class Main2Activity extends AppCompatActivity {
                     }
                     case 1:{
                         color1 = R.color.orange;
-//                        fragmentClass = Fragment_Add_Products.class;
+                        fragmentClass = Fragment_Add_Customers.class;
 
                         break;
                     }
                     case 2:{
                         color1 = R.color.green;
-//                        fragmentClass = Fragment_ViewCatalogs.class;
+//                        fragmentClass = Fragment_Add_Customers.class;
                         break;
                     }
                     case 3:{
@@ -164,5 +166,10 @@ public class Main2Activity extends AppCompatActivity {
             //  Log.v(TAG,"Permission is granted");
             return true;
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(String title) {
+
     }
 }

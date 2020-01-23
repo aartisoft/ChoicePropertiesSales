@@ -13,4 +13,6 @@ public interface LeedRepository {
 
     void readRequestsByStatus(final String status, final CallBack callBack);
 
+    void readSalesPersonByStatus(final String status, final CallBack callBack);
+
 }

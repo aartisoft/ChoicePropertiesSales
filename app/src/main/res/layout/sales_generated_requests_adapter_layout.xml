@@ -1,4 +1,7 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
         <LinearLayout
@@ -51,7 +54,7 @@
                             android:layout_height="wrap_content"
                             android:text="Customer Name "
                             android:textColor="@color/Black"
-                            android:layout_weight="90"
+                            android:layout_weight="60"
                             android:textSize="14dp" />
 
                             <TextView
@@ -59,7 +62,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Id:"
-                                android:layout_weight="10"
+                                android:layout_weight="40"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -76,7 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Address"
-                            android:layout_weight="90"
+                            android:layout_weight="60"
                             android:textColor="@color/Black"
                             android:textSize="14dp" />
 
@@ -85,7 +88,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="C Name:"
-                                android:layout_weight="10"
+                                android:layout_weight="40"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -104,7 +107,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Mobile Number"
                                 android:textColor="@color/Black"
-                                android:layout_weight="90"
+                                android:layout_weight="60"
                                 android:textSize="14dp" />
 
                             <TextView
@@ -112,7 +115,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Bank:"
-                                android:layout_weight="10"
+                                android:layout_weight="40"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -130,7 +133,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Status"
                                 android:textColor="@color/Black"
-                                android:layout_weight="90"
+                                android:layout_weight="60"
                                 android:textSize="14dp" />
 
                             <TextView
@@ -138,7 +141,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="LAP"
-                                android:layout_weight="10"
+                                android:layout_weight="40"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -152,4 +155,4 @@
 
         </LinearLayout>
 
-</layout>
+</LinearLayout>

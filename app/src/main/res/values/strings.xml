@@ -31,6 +31,7 @@
     <string name="login_fail_try_again">Login fail, please try again with correct login details.</string>
     <string name="server_error">Faild to fetch data, please try again.</string>
     <string name="action_sign_in_short">Register</string>
+    <string name="action_add_customer">Add</string>
     <string name="hint_mobile">Mobile Number</string>
     <string name="hint_password">Password</string>
     <string name="hint_discu">Disscussion</string>

@@ -15,4 +15,5 @@
     <color name="card_red">#da5956</color>
     <color name="card_color">#f6f6f6</color>
     <color name="input_register_bg">#3b4148</color>
+    <color name="darkgraycolor">#848484</color>
 </resources>
