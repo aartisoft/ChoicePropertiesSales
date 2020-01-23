@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.choiceproperties.Models.Customer;
 import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties.repository.LeedRepository;
@@ -66,7 +67,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         try {
 
             if (v == btnAdd) {
-
+                Customer customer = fillUserModel();
             }
 
         } catch (Exception e) {
@@ -75,21 +76,21 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
     }
 
 
-//    private User fillUserModel() {
-//        User user = new User();
-//        user.setName(Susername);
-//        user.setNumber(Smobilr);
-//        user.setAddress(Saddress);
-//        user.setPincode(Spincode);
-//        user.setPassword(Spassword);
-//        user.setRole(Srole);
-//        user.setImageList(imageList1);
-//        user.setStatus(Constant.USER_STATUS_ACTIVE);
-//        user.setUserid(Utility.generateAgentId(AGENT_PREFIX));
-//        user.setGeneratedId(Constant.SRVICE_PROVIDER_TABLE_REF.push().getKey());
-//
-//        return user;
-//    }
+    private Customer fillUserModel() {
+        Customer customer = new Customer();
+//        Customer.setName(Susername);
+//        Customer.setNumber(Smobilr);
+//        Customer.setAddress(Saddress);
+//        Customer.setPincode(Spincode);
+//        Customer.setPassword(Spassword);
+//        Customer.setRole(Srole);
+//        Customer.setImageList(imageList1);
+//        Customer.setStatus(Constant.USER_STATUS_ACTIVE);
+//        Customer.setUserid(Utility.generateAgentId(AGENT_PREFIX));
+//        Customer.setGeneratedId(Constant.SRVICE_PROVIDER_TABLE_REF.push().getKey());
+
+        return customer;
+    }
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
