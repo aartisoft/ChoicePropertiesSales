@@ -24,9 +24,8 @@ import com.example.choiceproperties.repository.impl.UserRepositoryImpl;
 
 public class Fragment_Add_Customers extends Fragment implements View.OnClickListener {
 
-    EditText inputName, inputMobile, inputpassword, inputAddress, inputPincode;
-    Button btnAdd ;
-
+    EditText inputName, inputMobile, inputNote, inputAddress, inputDateTime, inputDiscussion;
+    Button btnAdd;
 
 
     ProgressDialogClass progressDialogClass;
@@ -48,12 +47,15 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         leedRepository = new LeedRepositoryImpl();
         progressDialogClass = new ProgressDialogClass(getActivity());
 
+        inputName = (EditText) view.findViewById(R.id.username);
+        inputMobile = (EditText) view.findViewById(R.id.mobilenumber);
+        inputNote = (EditText) view.findViewById(R.id.note);
+        inputAddress = (EditText) view.findViewById(R.id.address);
+        inputDateTime = (EditText) view.findViewById(R.id.date_time);
+        inputDiscussion = (EditText) view.findViewById(R.id.discussion);
+        btnAdd = (Button) view.findViewById(R.id.add_button);
 
-
-
-
-
-
+        btnAdd.setOnClickListener(this);
         return view;
 
     }
@@ -63,17 +65,14 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
 
         try {
 
-//            if (v == rateCard) {
-//                pickImage();
-//            }
+            if (v == btnAdd) {
+
+            }
 
         } catch (Exception e) {
         }
 
     }
-
-
-
 
 
 //    private User fillUserModel() {
