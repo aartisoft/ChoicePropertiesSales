@@ -13,6 +13,7 @@ public class Constant {
     private static final FirebaseDatabase DATABASE = FirebaseDatabase.getInstance();
     public static final DatabaseReference USER_TABLE_REF = DATABASE.getReference("user");
     public static final DatabaseReference LEEDS_TABLE_REF = DATABASE.getReference("leeds");
+    public static final DatabaseReference REQUESTS_TABLE_REF = DATABASE.getReference("Request");
 
 
     /************************************** Firebase Authentication reference constants ***************************************************************************/
@@ -48,6 +49,9 @@ public class Constant {
     public static final String ROLE_SALES = "SALES";
     public static final String STATUS_ACTIVE = "ACTIVE";
     public static final String STATUS_DEACTIVE = "DEACTIVE";
+
+    public static final String STATUS_REQUEST_GENERATED = "GENERATED";
+    public static final String STATUS_REQUEST_VERIFIED = "VERIFIED";
 
 
 }

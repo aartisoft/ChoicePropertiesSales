@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.choiceproperties.R;
+import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shrikanthravi.customnavigationdrawer2.data.MenuItem;
 import com.shrikanthravi.customnavigationdrawer2.widget.SNavigationDrawer;
@@ -44,10 +45,10 @@ public class Main2Activity extends AppCompatActivity {
 
         sNavigationDrawer = findViewById(R.id.navigationDrawer);
         List<MenuItem> menuItems = new ArrayList<>();
-        menuItems.add(new MenuItem("Add Product Names",R.color.Black));
-        menuItems.add(new MenuItem("Upload Catalog Images",R.color.Black));
-        menuItems.add(new MenuItem("View Catalogs",R.color.Black));
-        menuItems.add(new MenuItem("Delete Banner Image",R.color.Black));
+        menuItems.add(new MenuItem("Requests",R.color.Black));
+        menuItems.add(new MenuItem("Add Customers",R.color.Black));
+        menuItems.add(new MenuItem("Add Plots",R.color.Black));
+        menuItems.add(new MenuItem("Accept Sales Requests",R.color.Black));
         menuItems.add(new MenuItem("Log Out",R.color.Black));
         sNavigationDrawer.setMenuItemList(menuItems);
 //        fragmentClass =  Fragment_ViewCatalogs.class;
@@ -70,7 +71,7 @@ public class Main2Activity extends AppCompatActivity {
                 switch (position){
                     case 0:{
                         color1 = R.color.red;
-//                        fragmentClass = Fragment_Add_Product_names.class;
+                        fragmentClass = Sales_Customer_Requests_Fragment.class;
                         break;
                     }
                     case 1:{
@@ -91,7 +92,6 @@ public class Main2Activity extends AppCompatActivity {
                     }
                     case 4:{
                         color1 = R.color.blue;
-//                        fragmentClass = MusicFragment.class;
                         FirebaseAuth.getInstance().signOut();
                         finish();
                         startActivity(new Intent(Main2Activity.this, LoginScreen.class));

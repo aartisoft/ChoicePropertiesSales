@@ -29,5 +29,6 @@
     <string name="file_uploading_complited_message">Total uploaded files :&#160; </string>
     <string name="data_updation_fails_message">Data updation failed, please try again.</string>
     <string name="login_fail_try_again">Login fail, please try again with correct login details.</string>
+    <string name="server_error">Faild to fetch data, please try again.</string>
 
 </resources>
