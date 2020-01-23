@@ -33,12 +33,12 @@ public class Admin_Sales__Tab_Fragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_sales_tab, container, false);
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-        viewPagerAdapter.addFragement(new Sales_Customer_Requests_Fragment(), "Generated");
-        viewPagerAdapter.addFragement(new Sales_Customer_Requests_Fragment(), "Approved");
+        viewPagerAdapter.addFragement(new Admin_Pending_sales_requests_Fragment(), "Deactive");
+        viewPagerAdapter.addFragement(new Admin_Pending_sales_requests_Fragment(), "Active");
         
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);
-        tabLayout.setTabMode(1);
+//        tabLayout.setTabMode(1);
         tabLayout.setupWithViewPager(viewPager);
         return view;
     }

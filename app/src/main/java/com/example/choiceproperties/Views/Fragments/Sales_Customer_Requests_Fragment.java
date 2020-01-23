@@ -16,6 +16,7 @@ import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Models.Requests;
 import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.Adapters.Sales_Customer_Requests_Adapter;
+import com.example.choiceproperties.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.example.choiceproperties.repository.LeedRepository;
 import com.example.choiceproperties.repository.impl.LeedRepositoryImpl;
@@ -31,6 +32,7 @@ public class Sales_Customer_Requests_Fragment extends Fragment implements Adapte
     RecyclerView listView;
     Sales_Customer_Requests_Adapter adapter;
     private List<Requests> requestList;
+    ProgressDialogClass progressDialogClass;
 
     public Sales_Customer_Requests_Fragment() {
     }
@@ -50,6 +52,7 @@ public class Sales_Customer_Requests_Fragment extends Fragment implements Adapte
             mListener.onFragmentInteraction("Paid");
 
             leedRepository = new LeedRepositoryImpl();
+            progressDialogClass = new ProgressDialogClass(getActivity());
             requestList = new ArrayList<>();
             listView = (RecyclerView) view.findViewById(R.id.recycler_view_users);
 
@@ -61,7 +64,8 @@ public class Sales_Customer_Requests_Fragment extends Fragment implements Adapte
 
     private void readRequests() {
         requestList.clear();
-        leedRepository.readRequestsByStatus(Constant.STATUS_REQUEST_GENERATED,new CallBack() {
+        progressDialogClass.showDialog(this.getString(R.string.loading),this.getString(R.string.PLEASE_WAIT));
+        leedRepository.readRequestsByStatus(Constant.STATUS_REQUEST_GENERATED, new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
@@ -69,17 +73,19 @@ public class Sales_Customer_Requests_Fragment extends Fragment implements Adapte
 
                 }
 
-                adapter = new Sales_Customer_Requests_Adapter(getActivity(), requestList,false);
+                adapter = new Sales_Customer_Requests_Adapter(getActivity(), requestList, false);
                 //adding adapter to recyclerview
                 listView.setAdapter(adapter);
                 listView.setHasFixedSize(true);
                 listView.setLayoutManager(new LinearLayoutManager(getContext()));
-
+                adapter.notifyDataSetChanged();
+                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
                 Utility.showLongMessage(getActivity(), getString(R.string.server_error));
+                progressDialogClass.dismissDialog();
             }
         });
     }

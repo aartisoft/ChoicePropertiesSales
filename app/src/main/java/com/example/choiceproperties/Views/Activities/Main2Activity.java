@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.choiceproperties.R;
+import com.example.choiceproperties.Views.Fragments.Admin_Sales__Tab_Fragment;
 import com.example.choiceproperties.Views.Fragments.Fragment_Add_Customers;
 import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
@@ -89,7 +90,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                     }
                     case 3:{
                         color1 = R.color.green;
-//                        fragmentClass = Fragment_Advertise.class;
+                        fragmentClass = Admin_Sales__Tab_Fragment.class;
                         break;
                     }
                     case 4:{
