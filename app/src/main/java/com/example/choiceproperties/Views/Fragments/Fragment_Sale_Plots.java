@@ -37,10 +37,10 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
     EditText inputPlotnumber, inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount, inputInstallment,
             inputPaidAmount, inputAgentName;
-    RadioGroup GroupInsatllment,GroupComission;
-    RadioButton Rinstallment,Rcomission;
+    RadioGroup GroupInsatllment, GroupComission;
+    RadioButton Rinstallment, Rcomission, radioCash, radioPaid;
     Button btnAdd;
-  String Sinstallment,Scomission;
+    String Sinstallment, Scomission;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
@@ -58,17 +58,19 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         userRepository = new UserRepositoryImpl(getActivity());
         progressDialogClass = new ProgressDialogClass(getActivity());
 
-        inputPlotnumber = (EditText) view.findViewById(R.id.username);
-        inputCustomerName = (EditText) view.findViewById(R.id.mobilenumber);
-        inputSalePrice = (EditText) view.findViewById(R.id.note);
-        inputDepositAmount = (EditText) view.findViewById(R.id.address);
-        inputRemainingAmount = (EditText) view.findViewById(R.id.date_time);
-        inputInstallment = (EditText) view.findViewById(R.id.discussion);
-        inputPaidAmount = (EditText) view.findViewById(R.id.discussion);
-        inputAgentName = (EditText) view.findViewById(R.id.discussion);
+        inputPlotnumber = (EditText) view.findViewById(R.id.plot_number);
+        inputCustomerName = (EditText) view.findViewById(R.id.customer_name);
+        inputSalePrice = (EditText) view.findViewById(R.id.plot_salling_price);
+        inputDepositAmount = (EditText) view.findViewById(R.id.deposit_amount);
+        inputRemainingAmount = (EditText) view.findViewById(R.id.remaining_amount);
+        inputInstallment = (EditText) view.findViewById(R.id.installment);
+        inputPaidAmount = (EditText) view.findViewById(R.id.paid);
+        inputAgentName = (EditText) view.findViewById(R.id.agent_name);
 
         GroupInsatllment = (RadioGroup) view.findViewById(R.id.group_installment_type);
         GroupComission = (RadioGroup) view.findViewById(R.id.group_agent_comission);
+        radioCash = (RadioButton) view.findViewById(R.id.cash);
+        radioPaid = (RadioButton) view.findViewById(R.id.comissionpaid);
 
         btnAdd = (Button) view.findViewById(R.id.add_button);
 
@@ -81,6 +83,10 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
             }
         });
+        if (GroupInsatllment.getCheckedRadioButtonId() != -1) {
+            Sinstallment = ((RadioButton) GroupInsatllment.getChildAt(GroupInsatllment.indexOfChild(GroupInsatllment.findViewById(GroupInsatllment.getCheckedRadioButtonId())))).getText().toString();
+
+        }
         GroupComission.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -89,6 +95,9 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
             }
         });
+        if (GroupComission.getCheckedRadioButtonId() != -1) {
+            Scomission = ((RadioButton) GroupComission.getChildAt(GroupComission.indexOfChild(GroupComission.findViewById(GroupComission.getCheckedRadioButtonId())))).getText().toString();
+        }
 
         return view;
 
@@ -124,6 +133,8 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
                 inputInstallment.setText("");
                 inputPaidAmount.setText("");
                 inputAgentName.setText("");
+                radioCash.setChecked(true);
+                radioPaid.setChecked(true);
                 progressDialogClass.dismissDialog();
             }
 
