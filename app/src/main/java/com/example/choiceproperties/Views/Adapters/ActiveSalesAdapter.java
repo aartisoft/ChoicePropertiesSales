@@ -40,7 +40,6 @@ public class ActiveSalesAdapter extends RecyclerView.Adapter<ActiveSalesAdapter.
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.sales_active_adapter_layout, parent, false);
         ActiveSalesAdapter.ViewHolder viewHolder = new ViewHolder(v);
-        //  context = parent.getContext();
         return viewHolder;
 
     }
@@ -76,13 +75,11 @@ public class ActiveSalesAdapter extends RecyclerView.Adapter<ActiveSalesAdapter.
                 leedRepository.updateUser(leedId, leedsMap, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
-//                progressDialogClass.dismissDialog();
-
+                        notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(Object object) {
-//                progressDialogClass.dismissDialog();
                         Context context1 = context;
                         Utility.showLongMessage(context1, context1.getString(R.string.server_error));
 
@@ -107,7 +104,6 @@ public class ActiveSalesAdapter extends RecyclerView.Adapter<ActiveSalesAdapter.
 
         public ViewHolder(View itemView) {
             super(itemView);
-
 
             txtName = (TextView) itemView.findViewById(R.id.txtidvalue);
             txtType = (TextView) itemView.findViewById(R.id.txtcnamevalue);

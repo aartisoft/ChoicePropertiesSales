@@ -1,7 +1,6 @@
 package com.example.choiceproperties.Views.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,6 @@ public class DeactiveSalesAdapter extends RecyclerView.Adapter<DeactiveSalesAdap
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.sales_adapter_layout, parent, false);
         DeactiveSalesAdapter.ViewHolder viewHolder = new ViewHolder(v);
-        //  context = parent.getContext();
         return viewHolder;
 
     }
@@ -77,13 +75,11 @@ public class DeactiveSalesAdapter extends RecyclerView.Adapter<DeactiveSalesAdap
                 leedRepository.updateUser(leedId, leedsMap, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
-//                progressDialogClass.dismissDialog();
-
+                        notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(Object object) {
-//                progressDialogClass.dismissDialog();
                         Context context1 = context;
                         Utility.showLongMessage(context1, context1.getString(R.string.server_error));
 
@@ -108,7 +104,6 @@ public class DeactiveSalesAdapter extends RecyclerView.Adapter<DeactiveSalesAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-
 
             txtName = (TextView) itemView.findViewById(R.id.txtidvalue);
             txtType = (TextView) itemView.findViewById(R.id.txtcnamevalue);

@@ -34,10 +34,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
-
 import java.util.concurrent.TimeUnit;
 
-import static com.example.choiceproperties.Constant.Constant.AGENT_PREFIX;
 import static com.example.choiceproperties.Constant.Constant.SALES_PREFIX;
 
 public class Registeractivity extends AppCompatActivity implements

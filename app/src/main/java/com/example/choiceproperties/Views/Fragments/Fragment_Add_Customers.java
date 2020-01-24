@@ -10,10 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -25,18 +23,13 @@ import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Models.Customer;
 import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.dialog.ProgressDialogClass;
-import com.example.choiceproperties.repository.LeedRepository;
 import com.example.choiceproperties.repository.UserRepository;
-import com.example.choiceproperties.repository.impl.LeedRepositoryImpl;
 import com.example.choiceproperties.repository.impl.UserRepositoryImpl;
-import com.example.choiceproperties.utilities.Utility;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.example.choiceproperties.Constant.Constant.AGENT_PREFIX;
-import static com.example.choiceproperties.Constant.Constant.CUSTOMER_PREFIX;
 
 public class Fragment_Add_Customers extends Fragment implements View.OnClickListener {
 

@@ -30,7 +30,6 @@ public class Constant {
     public static String FOUR_DIGIT_LIMIT = "%04d";
     public static final String SUCCESS = "Success";
 
-    public static final String AGENT_PREFIX = "AG-";
     public static final String SALES_PREFIX = "AG-";
     public static final String CUSTOMER_PREFIX = "CM-";
     public static final String EMAIL_POSTFIX = "@smartloan.com";
