@@ -150,7 +150,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         plots.setComissionStatus(Scomission);
         plots.setStatus(Constant.STATUS_PLOT_SOLD);
 
-        plots.setPloteId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
+        plots.setPloteId(Constant.SOLD_PLOT_TABLE_REF.push().getKey());
 
         return plots;
     }
