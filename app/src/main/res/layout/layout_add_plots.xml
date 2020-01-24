@@ -40,13 +40,14 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/username"
+                            android:id="@+id/plot_no"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
                             android:focusableInTouchMode="true"
-                            android:hint="User Name"
+                            android:hint="Plot Number"
                             android:imeOptions="actionUnspecified"
+                            android:inputType="number"
                             android:maxLines="1"
                             android:padding="10.0dip"
                             android:singleLine="true"
@@ -60,11 +61,11 @@
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/mobilenumber"
+                            android:id="@+id/plot_area"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
-                            android:hint="@string/hint_mobile"
+                            android:hint="Plot Area in Sq. Feets"
                             android:inputType="number"
                             android:maxLength="10"
                             android:maxLines="1"
@@ -74,79 +75,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edittextanimation"
-                            android:hint="Address"
-                            android:maxLines="1"
-                            android:padding="10.0dip"
-                            android:singleLine="true"
-                            android:textColor="@color/input_register_bg" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/note"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edittextanimation"
-                            android:hint="Note"
-                            android:inputType="textMultiLine"
-                            android:maxLines="1"
-                            android:padding="10.0dip"
-                            android:singleLine="true"
-                            android:textColor="@color/input_register_bg" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/date_time"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edittextanimation"
-                            android:hint="Visit Date And Time"
-                            android:inputType="datetime"
-                            android:focusable="false"
-                            android:maxLines="1"
-                            android:padding="10.0dip"
-                            android:singleLine="true"
-                            android:textColor="@color/input_register_bg" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/discussion"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/edittextanimation"
-                            android:focusableInTouchMode="true"
-                            android:hint="@string/hint_discu"
-                            android:imeOptions="actionUnspecified"
-                            android:inputType="textMultiLine"
-                            android:maxLines="1"
-                            android:padding="10.0dip"
-                            android:singleLine="true"
-                            android:textColor="@color/input_register_bg" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
                     
                     <Button
                         android:id="@+id/add_button"

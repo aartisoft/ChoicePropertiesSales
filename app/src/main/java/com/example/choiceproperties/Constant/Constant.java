@@ -15,6 +15,7 @@ public class Constant {
     public static final DatabaseReference LEEDS_TABLE_REF = DATABASE.getReference("leeds");
     public static final DatabaseReference REQUESTS_TABLE_REF = DATABASE.getReference("Request");
     public static final DatabaseReference CUSTOMERS_TABLE_REF = DATABASE.getReference("Customers");
+    public static final DatabaseReference PLOT_TABLE_REF = DATABASE.getReference("Plots");
 
 
     /************************************** Firebase Authentication reference constants ***************************************************************************/
@@ -55,5 +56,7 @@ public class Constant {
     public static final String STATUS_REQUEST_GENERATED = "GENERATED";
     public static final String STATUS_REQUEST_VERIFIED = "VERIFIED";
 
+    public static final String STATUS_PLOT_AVAILABLE = "AVAILABLE";
+    public static final String STATUS_PLOT_SOLD = "SOLD";
 
 }

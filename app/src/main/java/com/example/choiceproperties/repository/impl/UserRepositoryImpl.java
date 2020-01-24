@@ -8,6 +8,7 @@ import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Exception.ExceptionUtil;
 import com.example.choiceproperties.Models.Customer;
+import com.example.choiceproperties.Models.Plots;
 import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.repository.FirebaseTemplateRepository;
 import com.example.choiceproperties.repository.UserRepository;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import static com.example.choiceproperties.Constant.Constant.EMAIL_POSTFIX;
@@ -100,5 +102,51 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
             }
         });
     }
+
+    @Override
+    public void createPlot(Plots plots, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.PLOT_TABLE_REF.child(plots.getPloteId());
+        fireBaseCreate(databaseReference, plots, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+
+    @Override
+    public void readPlots(final CallBack callBack) {
+        final Query query = Constant.PLOT_TABLE_REF;
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<Plots> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            Plots plots = suggestionSnapshot.getValue(Plots.class);
+                            leedsModelArrayList.add(plots);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
 
 }

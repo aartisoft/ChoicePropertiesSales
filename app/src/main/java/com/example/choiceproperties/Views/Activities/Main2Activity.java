@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.Fragments.Admin_Sales__Tab_Fragment;
 import com.example.choiceproperties.Views.Fragments.Fragment_Add_Customers;
+import com.example.choiceproperties.Views.Fragments.Fragment_Add_Plots;
 import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -85,7 +86,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                     }
                     case 2:{
                         color1 = R.color.green;
-//                        fragmentClass = Fragment_Add_Customers.class;
+                        fragmentClass = Fragment_Add_Plots.class;
                         break;
                     }
                     case 3:{
