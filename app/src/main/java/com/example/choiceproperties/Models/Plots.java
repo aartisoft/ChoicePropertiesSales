@@ -12,6 +12,17 @@ public class Plots implements Serializable {
 
     private String plotnumber;
     private String plotarea;
+
+    private String customerNmae;
+    private String plotPrice;
+    private String depositAmount;
+    private String remainingAmount;
+    private String installment;
+    private String installmentType;
+    private String payedAmount;
+    private String agentName;
+    private String comissionStatus;
+
     private String status;
     private String ploteId;
     private Long createdDateTime;
@@ -66,6 +77,78 @@ public class Plots implements Serializable {
         this.ploteId = ploteId;
     }
 
+    public String getCustomerNmae() {
+        return customerNmae;
+    }
+
+    public void setCustomerNmae(String customerNmae) {
+        this.customerNmae = customerNmae;
+    }
+
+    public String getPlotPrice() {
+        return plotPrice;
+    }
+
+    public void setPlotPrice(String plotPrice) {
+        this.plotPrice = plotPrice;
+    }
+
+    public String getDepositAmount() {
+        return depositAmount;
+    }
+
+    public void setDepositAmount(String depositAmount) {
+        this.depositAmount = depositAmount;
+    }
+
+    public String getRemainingAmount() {
+        return remainingAmount;
+    }
+
+    public void setRemainingAmount(String remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
+
+    public String getInstallment() {
+        return installment;
+    }
+
+    public void setInstallment(String installment) {
+        this.installment = installment;
+    }
+
+    public String getInstallmentType() {
+        return installmentType;
+    }
+
+    public void setInstallmentType(String installmentType) {
+        this.installmentType = installmentType;
+    }
+
+    public String getPayedAmount() {
+        return payedAmount;
+    }
+
+    public void setPayedAmount(String payedAmount) {
+        this.payedAmount = payedAmount;
+    }
+
+    public String getAgentName() {
+        return agentName;
+    }
+
+    public void setAgentName(String agentName) {
+        this.agentName = agentName;
+    }
+
+    public String getComissionStatus() {
+        return comissionStatus;
+    }
+
+    public void setComissionStatus(String comissionStatus) {
+        this.comissionStatus = comissionStatus;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -73,6 +156,16 @@ public class Plots implements Serializable {
         result.put("plotarea", plotarea);
         result.put("status", status);
         result.put("ploteId", ploteId);
+
+        result.put("customerNmae", customerNmae);
+        result.put("plotPrice", plotPrice);
+        result.put("depositAmount", depositAmount);
+        result.put("remainingAmount", remainingAmount);
+        result.put("installment", installment);
+        result.put("installmentType", installmentType);
+        result.put("payedAmount", payedAmount);
+        result.put("agentName", agentName);
+        result.put("comissionStatus", comissionStatus);
 
         result.put("createdDateTime", getCreatedDateTime());
 
