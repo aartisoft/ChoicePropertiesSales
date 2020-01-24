@@ -102,7 +102,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
             if (v == btnAdd) {
                 progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
                 Plots plots = fillUserModel();
-                CreateCustomer(plots);
+                SalePlot(plots);
             }
 
 
@@ -111,25 +111,27 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
     }
 
-    private void CreateCustomer(Plots plots) {
-//        userRepository.createCustomer(plots, new CallBack() {
-//            @Override
-//            public void onSuccess(Object object) {
-//                Toast.makeText(getContext(), "Customer Added Successfully", Toast.LENGTH_SHORT).show();
-////                inputName.setText("");
-////                inputMobile.setText("");
-////                inputAddress.setText("");
-////                inputNote.setText("");
-////                inputDateTime.setText("");
-////                inputDiscussion.setText("");
-//                progressDialogClass.dismissDialog();
-//            }
-//
-//            @Override
-//            public void onError(Object object) {
-//
-//            }
-//        });
+    private void SalePlot(Plots plots) {
+        userRepository.salePlot(plots, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                Toast.makeText(getContext(), "Plot Sold Successfully", Toast.LENGTH_SHORT).show();
+                inputPlotnumber.setText("");
+                inputCustomerName.setText("");
+                inputSalePrice.setText("");
+                inputDepositAmount.setText("");
+                inputRemainingAmount.setText("");
+                inputInstallment.setText("");
+                inputPaidAmount.setText("");
+                inputAgentName.setText("");
+                progressDialogClass.dismissDialog();
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialogClass.dismissDialog();
+            }
+        });
 
     }
 
@@ -146,6 +148,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         plots.setPayedAmount(inputPaidAmount.getText().toString());
         plots.setAgentName(inputAgentName.getText().toString());
         plots.setComissionStatus(Scomission);
+        plots.setStatus(Constant.STATUS_PLOT_SOLD);
 
         plots.setPloteId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
 

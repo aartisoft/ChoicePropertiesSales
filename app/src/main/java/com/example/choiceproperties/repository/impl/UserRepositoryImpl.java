@@ -148,5 +148,20 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
         });
     }
 
+    @Override
+    public void salePlot(Plots plots, final CallBack callBack) {
+        DatabaseReference databaseReference = Constant.SOLD_PLOT_TABLE_REF.child(plots.getPloteId());
+        fireBaseCreate(databaseReference, plots, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                callBack.onSuccess(object);
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
 
 }

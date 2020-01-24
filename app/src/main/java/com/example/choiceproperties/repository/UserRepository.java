@@ -16,4 +16,6 @@ public interface UserRepository {
     void createPlot(final Plots plots, final CallBack callback);
 
     void readPlots(final CallBack callback);
+
+    void salePlot(final Plots plots, final CallBack callback);
 }

@@ -16,6 +16,7 @@ public class Constant {
     public static final DatabaseReference REQUESTS_TABLE_REF = DATABASE.getReference("Request");
     public static final DatabaseReference CUSTOMERS_TABLE_REF = DATABASE.getReference("Customers");
     public static final DatabaseReference PLOT_TABLE_REF = DATABASE.getReference("Plots");
+    public static final DatabaseReference SOLD_PLOT_TABLE_REF = DATABASE.getReference("SoldPlots");
 
 
     /************************************** Firebase Authentication reference constants ***************************************************************************/

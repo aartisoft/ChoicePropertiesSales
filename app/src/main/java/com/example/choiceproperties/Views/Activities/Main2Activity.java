@@ -16,6 +16,7 @@ import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.Fragments.Admin_Sales__Tab_Fragment;
 import com.example.choiceproperties.Views.Fragments.Fragment_Add_Customers;
 import com.example.choiceproperties.Views.Fragments.Fragment_Add_Plots;
+import com.example.choiceproperties.Views.Fragments.Fragment_Sale_Plots;
 import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,7 +98,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                     }
                     case 4:{
                         color1 = R.color.green;
-//                        fragmentClass = Admin_Sales__Tab_Fragment.class;
+                        fragmentClass = Fragment_Sale_Plots.class;
                         break;
                     }
                     case 5:{
