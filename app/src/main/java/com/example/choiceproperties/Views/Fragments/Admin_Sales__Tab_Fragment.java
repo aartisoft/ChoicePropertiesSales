@@ -34,7 +34,7 @@ public class Admin_Sales__Tab_Fragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         viewPagerAdapter.addFragement(new Admin_Pending_sales_requests_Fragment(), "Deactive");
-        viewPagerAdapter.addFragement(new Admin_Pending_sales_requests_Fragment(), "Active");
+        viewPagerAdapter.addFragement(new Admin_Active_sales_Persons_Fragment(), "Active");
         
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout = (TabLayout) view.findViewById(R.id.tabs);

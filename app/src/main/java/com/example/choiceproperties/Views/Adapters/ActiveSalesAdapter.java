@@ -1,7 +1,6 @@
 package com.example.choiceproperties.Views.Adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import com.example.choiceproperties.utilities.Utility;
 import java.util.List;
 import java.util.Map;
 
-public class DeactiveSalesAdapter extends RecyclerView.Adapter<DeactiveSalesAdapter.ViewHolder> {
+public class ActiveSalesAdapter extends RecyclerView.Adapter<ActiveSalesAdapter.ViewHolder> {
 
     private static List<User> searchArrayList;
     private Context context;
@@ -30,24 +29,24 @@ public class DeactiveSalesAdapter extends RecyclerView.Adapter<DeactiveSalesAdap
     LeedRepository leedRepository;
 
 
-    public DeactiveSalesAdapter(Context context, List<User> userArrayList, boolean isFromRequest) {
+    public ActiveSalesAdapter(Context context, List<User> userArrayList, boolean isFromRequest) {
         this.context = context;
         this.searchArrayList = userArrayList;
         this.isFromRequest = isFromRequest;
     }
 
     @Override
-    public DeactiveSalesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ActiveSalesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sales_adapter_layout, parent, false);
-        DeactiveSalesAdapter.ViewHolder viewHolder = new ViewHolder(v);
+                .inflate(R.layout.sales_active_adapter_layout, parent, false);
+        ActiveSalesAdapter.ViewHolder viewHolder = new ViewHolder(v);
         //  context = parent.getContext();
         return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(final DeactiveSalesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final ActiveSalesAdapter.ViewHolder holder, int position) {
         final User user = searchArrayList.get(position);
         leedRepository = new LeedRepositoryImpl();
 
@@ -67,7 +66,7 @@ public class DeactiveSalesAdapter extends RecyclerView.Adapter<DeactiveSalesAdap
             }
 
             private void setLeedStatus(User user) {
-                user.setStatus(Constant.STATUS_ACTIVE);
+                user.setStatus(Constant.STATUS_DEACTIVE);
                 updateLeed(user.getUserId(), user.getLeedStatusMap1());
             }
 

@@ -1,6 +1,8 @@
 package com.example.choiceproperties.Models;
 
 
+import androidx.core.app.NotificationCompat;
+
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ServerValue;
 
@@ -238,6 +240,14 @@ public class User implements Serializable {
         result.put("agentId", agentId);
         result.put("status", status);
         return result;
+    }
+
+    @Exclude
+    public Map getLeedStatusMap1() {
+        Map<String, Object> leedMap = new HashMap();
+        leedMap.put(NotificationCompat.CATEGORY_STATUS, getStatus());
+        leedMap.put("updatedDateTime", getUpdatedDateTime());
+        return leedMap;
     }
 
 }

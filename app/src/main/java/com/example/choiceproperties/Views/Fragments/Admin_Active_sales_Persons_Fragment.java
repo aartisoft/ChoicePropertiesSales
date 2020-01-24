@@ -15,6 +15,7 @@ import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.R;
+import com.example.choiceproperties.Views.Adapters.ActiveSalesAdapter;
 import com.example.choiceproperties.Views.Adapters.DeactiveSalesAdapter;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.example.choiceproperties.repository.LeedRepository;
@@ -23,18 +24,18 @@ import com.example.choiceproperties.utilities.Utility;
 
 import java.util.ArrayList;
 
-public class Admin_Pending_sales_requests_Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class Admin_Active_sales_Persons_Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     // NOTE: Removed Some unwanted Boiler Plate Codes
     private OnFragmentInteractionListener mListener;
     private LeedRepository leedRepository;
 
 
-    public Admin_Pending_sales_requests_Fragment() {
+    public Admin_Active_sales_Persons_Fragment() {
     }
 
     ArrayList<User> salesList;
     RecyclerView listView;
-    DeactiveSalesAdapter adapter;
+    ActiveSalesAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class Admin_Pending_sales_requests_Fragment extends Fragment implements A
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admin_pending_requests, container, false);
+        View view = inflater.inflate(R.layout.fragment_admin_active_requests, container, false);
         // NOTE : We are calling the onFragmentInteraction() declared in the MainActivity
         // ie we are sending "Fragment 1" as title parameter when fragment1 is activated
         if (mListener != null) {
@@ -61,7 +62,7 @@ public class Admin_Pending_sales_requests_Fragment extends Fragment implements A
 
     private void readExpences() {
         salesList.clear();
-        leedRepository.readSalesPersonByStatus(Constant.STATUS_DEACTIVE,new CallBack() {
+        leedRepository.readSalesPersonByStatus(Constant.STATUS_ACTIVE,new CallBack() {
             @Override
             public void onSuccess(Object object) {
                 if (object != null) {
@@ -70,7 +71,7 @@ public class Admin_Pending_sales_requests_Fragment extends Fragment implements A
 
                 }
 
-                adapter = new DeactiveSalesAdapter(getActivity(), salesList,false);
+                adapter = new ActiveSalesAdapter(getActivity(), salesList,false);
                 //adding adapter to recyclerview
                 listView.setAdapter(adapter);
                 listView.setHasFixedSize(true);

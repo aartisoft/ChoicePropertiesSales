@@ -100,7 +100,7 @@ public class Registeractivity extends AppCompatActivity implements
         switch (view.getId()) {
             case R.id.buttonsubmit:
                 String code = etotp.getText().toString();
-                validateAndCreateUser();
+//                validateAndCreateUser();
                 verifyCode(code);
                 break;
             case R.id.txttermsandconditions:
