@@ -26,6 +26,8 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
     RadioGroup GroupInsatllment, GroupComission;
     RadioButton Rinstallment, Rcomission, radioCash, radioBank, radioPaid, radioUnpaid;
     Button btnAdd;
+    String Sinstallment, Scomission;
+
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
     ArrayList<Plots> plotsArrayList;
@@ -54,6 +56,29 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
         radioUnpaid = (RadioButton) findViewById(R.id.comissionunpaid);
 
         btnAdd = (Button) findViewById(R.id.add_button);
+        GroupInsatllment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                Rinstallment = (RadioButton) findViewById(checkedId);
+                Sinstallment = Rinstallment.getText().toString();
+
+            }
+        });
+        if (GroupInsatllment.getCheckedRadioButtonId() != -1) {
+            Sinstallment = ((RadioButton) GroupInsatllment.getChildAt(GroupInsatllment.indexOfChild(GroupInsatllment.findViewById(GroupInsatllment.getCheckedRadioButtonId())))).getText().toString();
+
+        }
+        GroupComission.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                Rcomission = (RadioButton) findViewById(checkedId);
+                Scomission = Rcomission.getText().toString();
+
+            }
+        });
+        if (GroupComission.getCheckedRadioButtonId() != -1) {
+            Scomission = ((RadioButton) GroupComission.getChildAt(GroupComission.indexOfChild(GroupComission.findViewById(GroupComission.getCheckedRadioButtonId())))).getText().toString();
+        }
 
         getData();
     }
