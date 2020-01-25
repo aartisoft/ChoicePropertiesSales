@@ -59,4 +59,5 @@ public class Constant {
     public static final String STATUS_PLOT_AVAILABLE = "AVAILABLE";
     public static final String STATUS_PLOT_SOLD = "SOLD";
 
+    public static final String PLOTS = "Plots";
 }

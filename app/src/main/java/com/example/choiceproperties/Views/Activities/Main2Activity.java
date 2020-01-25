@@ -17,6 +17,7 @@ import com.example.choiceproperties.Views.Fragments.Admin_Sales__Tab_Fragment;
 import com.example.choiceproperties.Views.Fragments.Fragment_Add_Customers;
 import com.example.choiceproperties.Views.Fragments.Fragment_Add_Plots;
 import com.example.choiceproperties.Views.Fragments.Fragment_Sale_Plots;
+import com.example.choiceproperties.Views.Fragments.Fragment_Sold_Out_Plots;
 import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,6 +56,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
         menuItems.add(new MenuItem("Add Plots",R.color.Black));
         menuItems.add(new MenuItem("Accept Sales Requests",R.color.Black));
         menuItems.add(new MenuItem("Sale Plot",R.color.Black));
+        menuItems.add(new MenuItem("Sold Out Plot",R.color.Black));
         menuItems.add(new MenuItem("Log Out",R.color.Black));
         sNavigationDrawer.setMenuItemList(menuItems);
         fragmentClass =  Sales_Customer_Requests_Fragment.class;
@@ -102,6 +104,11 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                         break;
                     }
                     case 5:{
+                        color1 = R.color.green;
+                        fragmentClass = Fragment_Sold_Out_Plots.class;
+                        break;
+                    }
+                    case 6:{
                         color1 = R.color.blue;
                         FirebaseAuth.getInstance().signOut();
                         finish();

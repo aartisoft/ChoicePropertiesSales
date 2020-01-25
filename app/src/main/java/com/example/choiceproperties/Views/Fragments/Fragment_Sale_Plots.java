@@ -9,11 +9,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -26,24 +28,34 @@ import com.example.choiceproperties.Models.Customer;
 import com.example.choiceproperties.Models.Plots;
 import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.dialog.ProgressDialogClass;
+import com.example.choiceproperties.repository.LeedRepository;
 import com.example.choiceproperties.repository.UserRepository;
+import com.example.choiceproperties.repository.impl.LeedRepositoryImpl;
 import com.example.choiceproperties.repository.impl.UserRepositoryImpl;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Fragment_Sale_Plots extends Fragment implements View.OnClickListener {
 
-    EditText inputPlotnumber, inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount, inputInstallment,
+    EditText  inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount, inputInstallment,
             inputPaidAmount, inputAgentName;
     RadioGroup GroupInsatllment, GroupComission;
     RadioButton Rinstallment, Rcomission, radioCash, radioPaid;
     Button btnAdd;
+    Spinner spinnerPlotNumber;
     String Sinstallment, Scomission;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
+    DatabaseReference ref;
+    LeedRepository leedRepository;
+    ArrayList<Plots> plotsArrayList;
+    ArrayList<String> plotsNumbersList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,9 +68,15 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         final View view = inflater.inflate(R.layout.layout_sale_plots, container, false);
 
         userRepository = new UserRepositoryImpl(getActivity());
+        leedRepository = new LeedRepositoryImpl();
         progressDialogClass = new ProgressDialogClass(getActivity());
 
-        inputPlotnumber = (EditText) view.findViewById(R.id.plot_number);
+        plotsArrayList = new ArrayList<>();
+        plotsNumbersList = new ArrayList<>();
+
+        ref = Constant.PLOT_TABLE_REF;
+
+        spinnerPlotNumber = (Spinner) view.findViewById(R.id.plot_number);
         inputCustomerName = (EditText) view.findViewById(R.id.customer_name);
         inputSalePrice = (EditText) view.findViewById(R.id.plot_salling_price);
         inputDepositAmount = (EditText) view.findViewById(R.id.deposit_amount);
@@ -99,8 +117,36 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
             Scomission = ((RadioButton) GroupComission.getChildAt(GroupComission.indexOfChild(GroupComission.findViewById(GroupComission.getCheckedRadioButtonId())))).getText().toString();
         }
 
+        ReadPplots();
         return view;
 
+    }
+
+    private void ReadPplots() {
+        plotsNumbersList.clear();
+        plotsArrayList.clear();
+        userRepository.readPlots(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null){
+                    plotsArrayList = (ArrayList<Plots>) object;
+
+                    for (Plots plot: plotsArrayList) {
+                        plotsNumbersList.add(plot.getPlotnumber());
+                    }
+
+                    ArrayAdapter<String> plotNumbersAdapter = new ArrayAdapter<String>(getContext(),
+                            android.R.layout.simple_spinner_item, plotsNumbersList);
+                    plotNumbersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerPlotNumber.setAdapter(plotNumbersAdapter);
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+
+            }
+        });
     }
 
     @Override
@@ -110,8 +156,26 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
             if (v == btnAdd) {
                 progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-                Plots plots = fillUserModel();
-                SalePlot(plots);
+                final Plots plots = fillUserModel();
+
+                userRepository.readPlotsByPlotNumber(plots.getPlotnumber(), new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        if (object != null){
+                            Plots plots1 = (Plots) object;
+                            String plotId = plots1.getPloteId();
+
+                            ref.child(plotId).removeValue();
+                            SalePlot(plots);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+
+                    }
+                });
+
             }
 
 
@@ -125,7 +189,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
             @Override
             public void onSuccess(Object object) {
                 Toast.makeText(getContext(), "Plot Sold Successfully", Toast.LENGTH_SHORT).show();
-                inputPlotnumber.setText("");
+
                 inputCustomerName.setText("");
                 inputSalePrice.setText("");
                 inputDepositAmount.setText("");
@@ -136,6 +200,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
                 radioCash.setChecked(true);
                 radioPaid.setChecked(true);
                 progressDialogClass.dismissDialog();
+
             }
 
             @Override
@@ -149,7 +214,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
     private Plots fillUserModel() {
         Plots plots = new Plots();
-        plots.setPlotnumber(inputPlotnumber.getText().toString());
+        plots.setPlotnumber(spinnerPlotNumber.getSelectedItem().toString());
         plots.setCustomerNmae(inputCustomerName.getText().toString());
         plots.setPlotPrice(inputSalePrice.getText().toString());
         plots.setDepositAmount(inputDepositAmount.getText().toString());

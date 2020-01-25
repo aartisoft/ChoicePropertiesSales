@@ -164,4 +164,60 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
         });
     }
 
+    @Override
+    public void readPlotsByPlotNumber(String plotNumber, final CallBack callBack) {
+        final Query query = Constant.PLOT_TABLE_REF.orderByChild("plotnumber").equalTo(plotNumber);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        Plots plots = new Plots();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                             plots = suggestionSnapshot.getValue(Plots.class);
+
+                        }
+                        callBack.onSuccess(plots);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
+    @Override
+    public void readSoldOutPlots(final CallBack callBack) {
+        final Query query = Constant.SOLD_PLOT_TABLE_REF;
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<Plots> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            Plots plots = suggestionSnapshot.getValue(Plots.class);
+                            leedsModelArrayList.add(plots);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
 }
