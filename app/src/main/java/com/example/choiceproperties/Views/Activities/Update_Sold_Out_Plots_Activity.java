@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Models.Plots;
@@ -27,6 +28,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
     RadioButton Rinstallment, Rcomission, radioCash, radioBank, radioPaid, radioUnpaid;
     Button btnAdd;
     String Sinstallment, Scomission;
+    TextView txtPAmount,txtRamount;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
@@ -54,6 +56,9 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
         radioPaid = (RadioButton) findViewById(R.id.comissionpaid);
         radioBank = (RadioButton) findViewById(R.id.bank);
         radioUnpaid = (RadioButton) findViewById(R.id.comissionunpaid);
+
+        txtPAmount = (TextView) findViewById(R.id.Pamount);
+        txtRamount = (TextView) findViewById(R.id.Ramount);
 
         btnAdd = (Button) findViewById(R.id.add_button);
         GroupInsatllment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -129,12 +134,14 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
         }
         if (paymentAmount != null) {
             inputPaidAmount.setText(paymentAmount);
+            txtPAmount.setText(paymentAmount);
         }
         if (plotPrice != null) {
             inputSalePrice.setText(plotPrice);
         }
         if (remainingAmount != null) {
             inputRemainingAmount.setText(remainingAmount);
+            txtRamount.setText(remainingAmount);
         }
 
     }

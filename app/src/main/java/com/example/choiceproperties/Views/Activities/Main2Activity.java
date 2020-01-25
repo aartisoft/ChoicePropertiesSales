@@ -46,7 +46,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
         if (per){
             //   Toast.makeText(this, "Storage Premission Granted", Toast.LENGTH_SHORT).show();
         }else {
-            Toast.makeText(this, "Storage Premission Required", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Storage Premission Required", Toast.LENGTH_SHORT).show();
         }
 
         sNavigationDrawer = findViewById(R.id.navigationDrawer);
