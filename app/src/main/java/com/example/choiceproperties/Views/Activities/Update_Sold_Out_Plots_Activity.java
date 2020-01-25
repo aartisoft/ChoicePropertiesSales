@@ -2,7 +2,9 @@ package com.example.choiceproperties.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -10,16 +12,21 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Constant.Constant;
 import com.example.choiceproperties.Models.Plots;
+import com.example.choiceproperties.Models.User;
 import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.dialog.ProgressDialogClass;
+import com.example.choiceproperties.repository.LeedRepository;
 import com.example.choiceproperties.repository.UserRepository;
+import com.example.choiceproperties.repository.impl.LeedRepositoryImpl;
 import com.example.choiceproperties.utilities.Utility;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
+public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements View.OnClickListener {
 
     Plots plots;
     EditText inputPlotNumber, inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount, inputInstallment,
@@ -32,7 +39,10 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
+    LeedRepository leedRepository;
     ArrayList<Plots> plotsArrayList;
+
+    String previousRemainingAmount,previousPayedAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +50,8 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_update__sold__out__plots_);
 
         plots = (Plots) getIntent().getSerializableExtra(Constant.PLOTS);
+
+        leedRepository = new LeedRepositoryImpl();
 
         inputPlotNumber = (EditText) findViewById(R.id.plot_number);
         inputCustomerName = (EditText) findViewById(R.id.customer_name);
@@ -61,6 +73,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
         txtRamount = (TextView) findViewById(R.id.Ramount);
 
         btnAdd = (Button) findViewById(R.id.add_button);
+        btnAdd.setOnClickListener(this);
         GroupInsatllment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -144,5 +157,49 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity {
             txtRamount.setText(remainingAmount);
         }
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == btnAdd){
+            setLeedStatus(plots);
+        }
+    }
+
+    private void setLeedStatus(Plots plots) {
+        plots.setPlotnumber(inputPlotNumber.getText().toString());
+        plots.setCustomerNmae(inputCustomerName.getText().toString());
+        plots.setPlotPrice(inputSalePrice.getText().toString());
+        plots.setDepositAmount(inputDepositAmount.getText().toString());
+
+        plots.setRemainingAmount(inputPlotNumber.getText().toString());
+        plots.setInstallment(inputPlotNumber.getText().toString());
+
+        plots.setInstallmentType(Sinstallment);
+
+        plots.setPayedAmount(inputPlotNumber.getText().toString());
+
+        plots.setAgentName(inputAgentName.getText().toString());
+        plots.setComissionStatus(Scomission);
+        updateLeed(plots.getPloteId(), plots.toMap());
+    }
+
+    private void updateLeed(String leedId, Map leedsMap) {
+
+        leedRepository = new LeedRepositoryImpl();
+        leedRepository.updateUser(leedId, leedsMap, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+
+
+            }
+
+            @Override
+            public void onError(Object object) {
+
+                Utility.showLongMessage(getApplication(), getString(R.string.server_error));
+
+            }
+        });
     }
 }
