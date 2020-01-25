@@ -29,6 +29,7 @@ public class Constant {
     public static String TWO_DIGIT_LIMIT = "%02d";
     public static String FOUR_DIGIT_LIMIT = "%04d";
     public static final String SUCCESS = "Success";
+    public static final String GLOBAL_DATE_FORMATE = "dd MMM yyyy";
 
     public static final String SALES_PREFIX = "AG-";
     public static final String CUSTOMER_PREFIX = "CM-";
