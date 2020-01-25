@@ -187,7 +187,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
     private void updateLeed(String leedId, Map leedsMap) {
 
         leedRepository = new LeedRepositoryImpl();
-        leedRepository.updateUser(leedId, leedsMap, new CallBack() {
+        leedRepository.updatePlot(leedId, leedsMap, new CallBack() {
             @Override
             public void onSuccess(Object object) {
 
