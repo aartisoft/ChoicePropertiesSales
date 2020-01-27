@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -97,6 +99,13 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         if (GroupComission.getCheckedRadioButtonId() != -1) {
             Scomission = ((RadioButton) GroupComission.getChildAt(GroupComission.indexOfChild(GroupComission.findViewById(GroupComission.getCheckedRadioButtonId())))).getText().toString();
         }
+
+        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+        anim.setDuration(250); //You can manage the blinking time with this parameter
+        anim.setStartOffset(20);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+        txtRamount.startAnimation(anim);
 
         getData();
     }
