@@ -42,13 +42,13 @@ import java.util.Date;
 
 public class Fragment_Sale_Plots extends Fragment implements View.OnClickListener {
 
-    EditText  inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount, inputInstallment,
+    EditText  inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount,
             inputPaidAmount, inputAgentName;
-    RadioGroup GroupInsatllment, GroupComission;
-    RadioButton Rinstallment, Rcomission, radioCash, radioPaid;
+    RadioGroup GroupDeposite, GroupComission;
+    RadioButton Rdeposite, Rcomission, radioCash, radioPaid;
     Button btnAdd;
     Spinner spinnerPlotNumber;
-    String Sinstallment, Scomission;
+    String Sdeposite, Scomission;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
@@ -81,11 +81,10 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         inputSalePrice = (EditText) view.findViewById(R.id.plot_salling_price);
         inputDepositAmount = (EditText) view.findViewById(R.id.deposit_amount);
         inputRemainingAmount = (EditText) view.findViewById(R.id.remaining_amount);
-        inputInstallment = (EditText) view.findViewById(R.id.installment);
         inputPaidAmount = (EditText) view.findViewById(R.id.paid);
         inputAgentName = (EditText) view.findViewById(R.id.agent_name);
 
-        GroupInsatllment = (RadioGroup) view.findViewById(R.id.group_installment_type);
+        GroupDeposite = (RadioGroup) view.findViewById(R.id.group_installment_type);
         GroupComission = (RadioGroup) view.findViewById(R.id.group_agent_comission);
         radioCash = (RadioButton) view.findViewById(R.id.cash);
         radioPaid = (RadioButton) view.findViewById(R.id.comissionpaid);
@@ -93,16 +92,16 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         btnAdd = (Button) view.findViewById(R.id.add_button);
 
         btnAdd.setOnClickListener(this);
-        GroupInsatllment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        GroupDeposite.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                Rinstallment = (RadioButton) view.findViewById(checkedId);
-                Sinstallment = Rinstallment.getText().toString();
+                Rdeposite = (RadioButton) view.findViewById(checkedId);
+                Sdeposite = Rdeposite.getText().toString();
 
             }
         });
-        if (GroupInsatllment.getCheckedRadioButtonId() != -1) {
-            Sinstallment = ((RadioButton) GroupInsatllment.getChildAt(GroupInsatllment.indexOfChild(GroupInsatllment.findViewById(GroupInsatllment.getCheckedRadioButtonId())))).getText().toString();
+        if (GroupDeposite.getCheckedRadioButtonId() != -1) {
+            Sdeposite = ((RadioButton) GroupDeposite.getChildAt(GroupDeposite.indexOfChild(GroupDeposite.findViewById(GroupDeposite.getCheckedRadioButtonId())))).getText().toString();
 
         }
         GroupComission.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -195,7 +194,6 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
                 inputSalePrice.setText("");
                 inputDepositAmount.setText("");
                 inputRemainingAmount.setText("");
-                inputInstallment.setText("");
                 inputPaidAmount.setText("");
                 inputAgentName.setText("");
                 radioCash.setChecked(true);
@@ -219,9 +217,9 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         plots.setCustomerNmae(inputCustomerName.getText().toString());
         plots.setPlotPrice(inputSalePrice.getText().toString());
         plots.setDepositAmount(inputDepositAmount.getText().toString());
+        plots.setDepositType(Sdeposite);
         plots.setRemainingAmount(inputRemainingAmount.getText().toString());
-        plots.setInstallment(inputInstallment.getText().toString());
-        plots.setInstallmentType(Sinstallment);
+//        plots.setInstallmentType(Sinstallment);
         plots.setPayedAmount(inputPaidAmount.getText().toString());
         plots.setAgentName(inputAgentName.getText().toString());
         plots.setComissionStatus(Scomission);

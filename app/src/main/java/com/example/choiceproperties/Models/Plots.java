@@ -16,6 +16,7 @@ public class Plots implements Serializable {
     private String customerNmae;
     private String plotPrice;
     private String depositAmount;
+    private String depositType;
     private String remainingAmount;
     private String installment;
     private String installmentType;
@@ -149,6 +150,14 @@ public class Plots implements Serializable {
         this.comissionStatus = comissionStatus;
     }
 
+    public String getDepositType() {
+        return depositType;
+    }
+
+    public void setDepositType(String depositType) {
+        this.depositType = depositType;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -160,6 +169,7 @@ public class Plots implements Serializable {
         result.put("customerNmae", customerNmae);
         result.put("plotPrice", plotPrice);
         result.put("depositAmount", depositAmount);
+        result.put("depositType", depositType);
         result.put("remainingAmount", remainingAmount);
         result.put("installment", installment);
         result.put("installmentType", installmentType);
