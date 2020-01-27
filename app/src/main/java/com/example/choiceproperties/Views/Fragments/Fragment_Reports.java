@@ -46,11 +46,12 @@ public class Fragment_Reports extends Fragment {
     long fromDate, toDate;
     private RecyclerView catalogRecycler;
     private ArrayList<Plots> SoldOutPlotList;
+    private ArrayList<Plots> AvailablePlotList;
     Reports_Adapter adapter;
 
     private OnFragmentInteractionListener mListener;
     private EditText edittextfromdate, edittexttodate;
-    TextView TotalRequests, ApprovedRequests, CompletedRequests;
+    TextView TotalPlots, SoldoutPlots, RemainingPlots;
     LeedRepository leedRepository;
     UserRepository userRepository;
     private ProgressDialog progressDialog;
@@ -79,6 +80,7 @@ public class Fragment_Reports extends Fragment {
         progressDialog = new ProgressDialog(getContext());
 
         SoldOutPlotList = new ArrayList<>();
+        AvailablePlotList = new ArrayList<>();
 
         catalogRecycler = (RecyclerView) view.findViewById(R.id.catalog_recycle);
         catalogRecycler.setHasFixedSize(true);
@@ -86,19 +88,19 @@ public class Fragment_Reports extends Fragment {
 
         edittextfromdate = (EditText) view.findViewById(R.id.edittextfromdate);
         edittexttodate = (EditText) view.findViewById(R.id.edittexttodate);
-        TotalRequests = (TextView) view.findViewById(R.id.text_view_total_leads_count);
-        ApprovedRequests = (TextView) view.findViewById(R.id.text_view_approved_leads_count);
-        CompletedRequests = (TextView) view.findViewById(R.id.text_view_rejected_leads_count);
+        TotalPlots = (TextView) view.findViewById(R.id.text_view_total_plots_count);
+        SoldoutPlots = (TextView) view.findViewById(R.id.text_view_sold_plots_count);
+        RemainingPlots = (TextView) view.findViewById(R.id.text_view_remaining_plots_count);
 
-        getAllPlots();
+        getAllSoldPlots();
+
         setFromDateClickListner();
         setToDateClickListner();
 
         return view;
     }
 
-
-    private void getAllPlots() {
+    private void getAllSoldPlots() {
         progressDialog.setMessage("Please wait...");
         progressDialog.show();
         userRepository.readSoldOutPlots(new CallBack() {
@@ -106,6 +108,28 @@ public class Fragment_Reports extends Fragment {
             public void onSuccess(Object object) {
                 if (object != null) {
                     SoldOutPlotList = (ArrayList<Plots>) object;
+                    getAvailablePlots();
+
+                    progressDialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                progressDialog.dismiss();
+            }
+        });
+
+    }
+
+    private void getAvailablePlots() {
+        progressDialog.setMessage("Please wait...");
+        progressDialog.show();
+        userRepository.readPlots(new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    AvailablePlotList = (ArrayList<Plots>) object;
                     serAdapter(SoldOutPlotList);
                     progressDialog.dismiss();
                 }
@@ -117,6 +141,20 @@ public class Fragment_Reports extends Fragment {
             }
         });
 
+    }
+
+    private void serAdapter(ArrayList<Plots> leedsModels) {
+        setReports(leedsModels);
+        if (leedsModels != null) {
+            if (adapter == null) {
+                adapter = new Reports_Adapter(getActivity(), leedsModels);
+                catalogRecycler.setAdapter(adapter);
+            } else {
+                ArrayList<Plots> leedsModelArrayList = new ArrayList<>();
+                leedsModelArrayList.addAll(leedsModels);
+                adapter.reload(leedsModelArrayList);
+            }
+        }
     }
 
     private void filterByDate(ArrayList<Plots> leedsModelArrayList) {
@@ -143,45 +181,21 @@ public class Fragment_Reports extends Fragment {
         }
     }
 
-    private void serAdapter(ArrayList<Plots> leedsModels) {
-//        setReports(leedsModels);
-        if (leedsModels != null) {
-            if (adapter == null) {
-                adapter = new Reports_Adapter(getActivity(), leedsModels);
-                catalogRecycler.setAdapter(adapter);
-            } else {
-                ArrayList<Plots> leedsModelArrayList = new ArrayList<>();
-                leedsModelArrayList.addAll(leedsModels);
-                adapter.reload(leedsModelArrayList);
-            }
-        }
-    }
-
     private void setReports(ArrayList<Plots> leedsModelArrayList) {
-        int approvedCount = 0, rejectedCount = 0;
-        double totalPayout = 0;
+        int soldoutCount = 0, availableCount = 0;
+        int totalPayout = 0;
         if (leedsModelArrayList != null) {
-            for (Plots leedsModel :
-                    leedsModelArrayList) {
-                if (!Utility.isEmptyOrNull(leedsModel.getStatus())) {
-//                    if (leedsModel.getStatus().equalsIgnoreCase(STATUS_APPROVED)) {
-//                        approvedCount++;
-//
-//                    } else if (leedsModel.getStatus().equalsIgnoreCase(STATUS_COMPLETE)) {
-//                        rejectedCount++;
-//                    }
-                }
-            }//end of for
+           soldoutCount = SoldOutPlotList.size();
+           availableCount = AvailablePlotList.size();
+           totalPayout = soldoutCount + availableCount;
 
-            TotalRequests.setText(String.valueOf(leedsModelArrayList.size()));
-            ApprovedRequests.setText(String.valueOf(approvedCount));
-            CompletedRequests.setText(String.valueOf(rejectedCount));
-            // fragmentReportBinding.textViewPayoutAmount.setText(String.valueOf(totalPayout));
+            TotalPlots.setText(String.valueOf(totalPayout));
+            SoldoutPlots.setText(String.valueOf(soldoutCount));
+            RemainingPlots.setText(String.valueOf(availableCount));
         } else {
-            TotalRequests.setText("0");
-            ApprovedRequests.setText("0");
-            CompletedRequests.setText("0");
-            //fragmentReportBinding.textViewPayoutAmount.setText("0.0");
+            TotalPlots.setText("0");
+            SoldoutPlots.setText("0");
+            RemainingPlots.setText("0");
         }
     }
 

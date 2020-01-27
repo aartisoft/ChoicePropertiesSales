@@ -132,7 +132,7 @@
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/text_view_total_leads_count"
+                                    android:id="@+id/text_view_total_plots_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -174,7 +174,7 @@
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/text_view_approved_leads_count"
+                                    android:id="@+id/text_view_sold_plots_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
@@ -215,7 +215,7 @@
                                     android:textSize="14sp" />
 
                                 <TextView
-                                    android:id="@+id/text_view_rejected_leads_count"
+                                    android:id="@+id/text_view_remaining_plots_count"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"

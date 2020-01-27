@@ -94,12 +94,12 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
                 TextView txtAgentName = (TextView) dialog.findViewById(R.id.txt_agent_name_value);
                 TextView txtPlotNumber = (TextView) dialog.findViewById(R.id.txt_plot_number_value);
 
-                txtPlotNumber.setText(plots.getPlotnumber());
-                txtCustomerName.setText(plots.getCustomerNmae());
-                txtTotalAmount.setText(plots.getPlotPrice());
-                txtPaidAmount.setText(plots.getPayedAmount());
-                txtPendingAmount.setText(plots.getRemainingAmount());
-                txtAgentName.setText(plots.getAgentName());
+                txtPlotNumber.setText(": "+ plots.getPlotnumber());
+                txtCustomerName.setText(": "+ plots.getCustomerNmae());
+                txtTotalAmount.setText(": "+ plots.getPlotPrice());
+                txtPaidAmount.setText(": "+ plots.getPayedAmount());
+                txtPendingAmount.setText(": "+ plots.getRemainingAmount());
+                txtAgentName.setText(": "+ plots.getAgentName());
                 txtSoldDate.setText(": "+ Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
 
 
