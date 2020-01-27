@@ -37,97 +37,119 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
                         android:weightSum="90">
 
-                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
                             android:id="@+id/card_view_total"
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            xmlns:tools="http://schemas.android.com/tools"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="10dp"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
+                            android:layout_weight="30"
+                            android:padding="20dp"
                             app:cardBackgroundColor="@color/card_color2"
-                            android:layout_weight="30"
-                            android:layout_margin="2dp">
+                            app:cardCornerRadius="10dp">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Total Price" />
+                                android:layout_margin="10dp"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/Tamount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_margin="20dp"
-                                android:text="T Amount" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Total Amount" />
 
+                                <TextView
+                                    android:id="@+id/Tamount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="T Amount" />
+
+                            </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
                             android:id="@+id/card_view_remaining"
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            xmlns:tools="http://schemas.android.com/tools"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="10dp"
-                            app:cardBackgroundColor="@color/card_color1"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
                             android:layout_weight="30"
-                            android:layout_margin="2dp">
+                            android:padding="20dp"
+                            app:cardBackgroundColor="@color/card_color1"
+                            app:cardCornerRadius="10dp">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Remaining Amount" />
+                                android:layout_margin="10dp"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/Ramount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_margin="20dp"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:text="R Amount" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Balance Amount" />
+
+                                <TextView
+                                    android:id="@+id/Ramount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="R Amount" />
+
+                            </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
 
-                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
-                            android:id="@+id/card_view_payed"
-                            xmlns:android="http://schemas.android.com/apk/res/android"
+                        <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:card_view="https://schemas.android.com/apk/res-auto"
                             xmlns:tools="http://schemas.android.com/tools"
+                            android:id="@+id/card_view_payed"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="10dp"
-                            app:cardBackgroundColor="@color/card_color3"
+                            android:layout_height="match_parent"
+                            android:layout_margin="2dp"
                             android:layout_weight="30"
-                            android:layout_margin="2dp">
+                            app:cardBackgroundColor="@color/card_color3"
+                            app:cardCornerRadius="10dp">
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Payed Amount" />
+                                android:layout_margin="10dp"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/Pamount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_margin="20dp"
-                                android:text="R Amount" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Payed Amount" />
+
+                                <TextView
+                                    android:id="@+id/Pamount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text="R Amount" />
+
+                            </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
 

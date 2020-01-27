@@ -203,6 +203,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         plots.setPayedAmount(String.valueOf(afterpayed));
         plots.setAgentName(inputAgentName.getText().toString());
         plots.setComissionStatus(Scomission);
+        plots.setDepositType(plots.getDepositType());
         plots.setCreatedDateTime(plots.getCreatedDateTimeLong());
         updateLeed(plots.getPloteId(), plots.toMap());
     }
