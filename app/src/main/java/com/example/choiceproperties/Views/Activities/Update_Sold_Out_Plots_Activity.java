@@ -3,6 +3,7 @@ package com.example.choiceproperties.Views.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -13,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.choiceproperties.CallBack.CallBack;
 import com.example.choiceproperties.Constant.Constant;
@@ -31,27 +33,39 @@ import java.util.Map;
 public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements View.OnClickListener {
 
     Plots plots;
-    EditText inputPlotNumber, inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount, inputInstallment,
-            inputPaidAmount, inputAgentName;
+    EditText inputPlotNumber, inputCustomerName, inputSalePrice, inputDepositAmount, inputInstallment,
+            inputAgentName;
     RadioGroup GroupInsatllment, GroupComission;
     RadioButton Rinstallment, Rcomission, radioCash, radioBank, radioPaid, radioUnpaid;
     Button btnAdd;
     String Sinstallment, Scomission;
-    TextView txtPAmount,txtRamount;
+    TextView txtPAmount, txtRamount;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
     LeedRepository leedRepository;
     ArrayList<Plots> plotsArrayList;
+    int previousRemainingAmount, previousPayedAmount;
 
-    String previousRemainingAmount,previousPayedAmount;
-
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update__sold__out__plots_);
 
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         plots = (Plots) getIntent().getSerializableExtra(Constant.PLOTS);
+
+        previousPayedAmount = Integer.parseInt(plots.getPayedAmount());
+        previousRemainingAmount = Integer.parseInt(plots.getRemainingAmount());
 
         leedRepository = new LeedRepositoryImpl();
 
@@ -59,9 +73,9 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         inputCustomerName = (EditText) findViewById(R.id.customer_name);
         inputSalePrice = (EditText) findViewById(R.id.plot_salling_price);
         inputDepositAmount = (EditText) findViewById(R.id.deposit_amount);
-        inputRemainingAmount = (EditText) findViewById(R.id.remaining_amount);
+//        inputRemainingAmount = (EditText) findViewById(R.id.remaining_amount);
         inputInstallment = (EditText) findViewById(R.id.installment);
-        inputPaidAmount = (EditText) findViewById(R.id.paid);
+//        inputPaidAmount = (EditText) findViewById(R.id.paid);
         inputAgentName = (EditText) findViewById(R.id.agent_name);
 
         GroupInsatllment = (RadioGroup) findViewById(R.id.group_installment_type);
@@ -100,12 +114,12 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
             Scomission = ((RadioButton) GroupComission.getChildAt(GroupComission.indexOfChild(GroupComission.findViewById(GroupComission.getCheckedRadioButtonId())))).getText().toString();
         }
 
-        Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(250); //You can manage the blinking time with this parameter
-        anim.setStartOffset(20);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
-        txtRamount.startAnimation(anim);
+//        Animation anim = new AlphaAnimation(0.0f, 1.0f);
+//        anim.setDuration(250); //You can manage the blinking time with this parameter
+//        anim.setStartOffset(20);
+//        anim.setRepeatMode(Animation.REVERSE);
+//        anim.setRepeatCount(Animation.INFINITE);
+//        txtRamount.startAnimation(anim);
 
         getData();
     }
@@ -119,11 +133,18 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         String depositAmount = plots.getDepositAmount();
         String installment = plots.getInstallment();
         String installmentType = plots.getInstallmentType();
-        String paymentAmount = plots.getPayedAmount();
         String plotPrice = plots.getPlotPrice();
         String remainingAmount = plots.getRemainingAmount();
-
+        String payedAmount = plots.getPayedAmount();
 //                .setText(": "+ Utility.convertMilliSecondsToFormatedDate(plots.getCreatedDateTimeLong(), Constant.GLOBAL_DATE_FORMATE));
+
+
+        if (remainingAmount != null) {
+            txtRamount.setText(remainingAmount);
+        }
+        if (payedAmount != null) {
+            txtPAmount.setText(payedAmount);
+        }
 
         if (plotNumber != null) {
             inputPlotNumber.setText(plotNumber);
@@ -154,40 +175,32 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
                 radioBank.setChecked(true);
             }
         }
-        if (paymentAmount != null) {
-            inputPaidAmount.setText(paymentAmount);
-            txtPAmount.setText(paymentAmount);
-        }
         if (plotPrice != null) {
             inputSalePrice.setText(plotPrice);
-        }
-        if (remainingAmount != null) {
-            inputRemainingAmount.setText(remainingAmount);
-            txtRamount.setText(remainingAmount);
         }
 
     }
 
     @Override
     public void onClick(View view) {
-        if (view == btnAdd){
+        if (view == btnAdd) {
             setLeedStatus(plots);
         }
     }
 
     private void setLeedStatus(Plots plots) {
+
+        int afterpayed = previousPayedAmount + Integer.parseInt(inputInstallment.getText().toString());
+        int afterremained = previousRemainingAmount - Integer.parseInt(inputInstallment.getText().toString());
+
         plots.setPlotnumber(inputPlotNumber.getText().toString());
         plots.setCustomerNmae(inputCustomerName.getText().toString());
         plots.setPlotPrice(inputSalePrice.getText().toString());
         plots.setDepositAmount(inputDepositAmount.getText().toString());
-
-        plots.setRemainingAmount(inputPlotNumber.getText().toString());
-        plots.setInstallment(inputPlotNumber.getText().toString());
-
+        plots.setRemainingAmount(String.valueOf(afterremained));
+        plots.setInstallment(inputInstallment.getText().toString());
         plots.setInstallmentType(Sinstallment);
-
-        plots.setPayedAmount(inputPlotNumber.getText().toString());
-
+        plots.setPayedAmount(String.valueOf(afterpayed));
         plots.setAgentName(inputAgentName.getText().toString());
         plots.setComissionStatus(Scomission);
         updateLeed(plots.getPloteId(), plots.toMap());
@@ -199,8 +212,9 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         leedRepository.updatePlot(leedId, leedsMap, new CallBack() {
             @Override
             public void onSuccess(Object object) {
-
-
+                Toast.makeText(Update_Sold_Out_Plots_Activity.this, "Plot Updated SuccessFully", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Update_Sold_Out_Plots_Activity.this, Main2Activity.class);
+                startActivity(intent);
             }
 
             @Override
