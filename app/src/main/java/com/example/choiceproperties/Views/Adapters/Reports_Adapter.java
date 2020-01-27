@@ -20,9 +20,12 @@ import com.example.choiceproperties.R;
 import com.example.choiceproperties.Views.Activities.Update_Sold_Out_Plots_Activity;
 import com.example.choiceproperties.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties.repository.LeedRepository;
+import com.example.choiceproperties.utilities.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.choiceproperties.Constant.Constant.GLOBAL_DATE_FORMATE;
 
 public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHolder> {
 
@@ -50,7 +53,7 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(final Reports_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final Reports_Adapter.ViewHolder holder, final int position) {
         final Plots plots = searchArrayList.get(position);
 
         if (plots.getPlotnumber() != null) {
@@ -74,7 +77,6 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
             holder.txtStatus.setText("Null");
         }
 
-//        holder.txtbilldate.setText(": "+ Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
 
         holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +85,24 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
                 dialog.setContentView(R.layout.dialogeditnotice);
 
                 Button btnYes = (Button) dialog.findViewById(R.id.dialogButtoncancle);
+
+                TextView txtCustomerName = (TextView) dialog.findViewById(R.id.txt_customer_name_value);
+                TextView txtTotalAmount = (TextView) dialog.findViewById(R.id.txt_total_amount_value);
+                TextView txtSoldDate = (TextView) dialog.findViewById(R.id.txt_sold_date_value);
+                TextView txtPaidAmount = (TextView) dialog.findViewById(R.id.txt_paid_amount_value);
+                TextView txtPendingAmount = (TextView) dialog.findViewById(R.id.txt_panding_amount_value);
+                TextView txtAgentName = (TextView) dialog.findViewById(R.id.txt_agent_name_value);
+                TextView txtPlotNumber = (TextView) dialog.findViewById(R.id.txt_plot_number_value);
+
+                txtPlotNumber.setText(plots.getPlotnumber());
+                txtCustomerName.setText(plots.getCustomerNmae());
+                txtTotalAmount.setText(plots.getPlotPrice());
+                txtPaidAmount.setText(plots.getPayedAmount());
+                txtPendingAmount.setText(plots.getRemainingAmount());
+                txtAgentName.setText(plots.getAgentName());
+                txtSoldDate.setText(": "+ Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
+
+
                 btnYes.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
