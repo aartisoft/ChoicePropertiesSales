@@ -1,5 +1,6 @@
 package com.example.choiceproperties.Views.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -61,13 +62,13 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
         }else {
             holder.txtAddress.setText("Null");
         }
-        if (plots.getPayedAmount() != null) {
-            holder.txtNumber.setText(": " + searchArrayList.get(position).getPayedAmount());
+        if (plots.getPlotPrice() != null) {
+            holder.txtNumber.setText(": " + searchArrayList.get(position).getPlotPrice());
         }else {
             holder.txtNumber.setText("Null");
         }
-        if (plots.getRemainingAmount() != null) {
-            holder.txtStatus.setText(": " + searchArrayList.get(position).getRemainingAmount());
+        if (plots.getAgentName() != null) {
+            holder.txtStatus.setText(": " + searchArrayList.get(position).getAgentName());
         }else {
             holder.txtStatus.setText("Null");
         }
@@ -77,10 +78,8 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
         holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(holder.card_view.getContext(), Update_Sold_Out_Plots_Activity.class);
-                intent.putExtra(Constant.PLOTS
-                        , plots);
-                holder.card_view.getContext().startActivity(intent);
+                final Dialog dialog1 = new Dialog(holder.card_view.getContext());
+                dialog1.setContentView(R.layout.dialogeditnotice);
             }
         });
     }

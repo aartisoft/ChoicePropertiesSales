@@ -39,7 +39,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
     RadioButton Rinstallment, Rcomission, radioCash, radioBank, radioPaid, radioUnpaid;
     Button btnAdd;
     String Sinstallment, Scomission;
-    TextView txtPAmount, txtRamount;
+    TextView txtPAmount, txtRamount,txtTamount;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
@@ -85,6 +85,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
 
         txtPAmount = (TextView) findViewById(R.id.Pamount);
         txtRamount = (TextView) findViewById(R.id.Ramount);
+        txtTamount = (TextView) findViewById(R.id.Tamount);
 
         btnAdd = (Button) findViewById(R.id.add_button);
         btnAdd.setOnClickListener(this);
@@ -175,6 +176,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         }
         if (plotPrice != null) {
             inputSalePrice.setText(plotPrice);
+            txtTamount.setText(plotPrice);
         }
 
     }

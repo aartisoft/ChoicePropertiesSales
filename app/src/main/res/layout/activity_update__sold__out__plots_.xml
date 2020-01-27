@@ -38,41 +38,81 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:weightSum="100">
+                        android:layout_marginBottom="5dp"
+                        android:weightSum="90">
 
-                        <RelativeLayout
-                            android:id="@+id/circle"
-                            android:layout_width="120dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="50"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/circle_shape_outline" >
+                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view_remaining"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="@color/card_color1"
+                            android:layout_weight="30"
+                            android:layout_margin="2dp">
 
                             <TextView
                                 android:id="@+id/Ramount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
+                                android:layout_margin="20dp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
                                 android:text="R Amount" />
-                        </RelativeLayout>
 
-                        <RelativeLayout
-                            android:id="@+id/circle2"
-                            android:layout_width="120dp"
-                            android:layout_height="150dp"
-                            android:layout_gravity="center"
-                            android:layout_weight="50"
-                            android:layout_margin="10dp"
-                            android:background="@drawable/circle_shape_outline1" >
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view_payed"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="@color/card_color3"
+                            android:layout_weight="30"
+                            android:layout_margin="2dp">
 
                             <TextView
                                 android:id="@+id/Pamount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
-                                android:text="P Amount" />
-                        </RelativeLayout>
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_margin="20dp"
+                                android:text="R Amount" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view_total"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="@color/card_color2"
+                            android:layout_weight="30"
+                            android:layout_margin="2dp">
+
+                            <TextView
+                                android:id="@+id/Tamount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_margin="20dp"
+                                android:text="T Amount" />
+
+                        </androidx.cardview.widget.CardView>
+
 
                     </LinearLayout>
 
@@ -85,10 +125,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
+                            android:focusable="false"
                             android:focusableInTouchMode="true"
                             android:hint="Plot Number"
                             android:imeOptions="actionUnspecified"
-                            android:focusable="false"
                             android:inputType="number"
                             android:maxLines="1"
                             android:padding="10.0dip"
@@ -107,8 +147,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
-                            android:hint="Customer Name"
                             android:focusable="false"
+                            android:hint="Customer Name"
                             android:maxLines="1"
                             android:padding="10.0dip"
                             android:singleLine="true"
@@ -125,8 +165,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
-                            android:hint="Plot Selling Price"
                             android:focusable="false"
+                            android:hint="Plot Selling Price"
                             android:inputType="number"
                             android:maxLines="1"
                             android:padding="10.0dip"
@@ -144,9 +184,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
+                            android:focusable="false"
                             android:hint="Deposit Amount"
                             android:inputType="number"
-                            android:focusable="false"
                             android:maxLines="1"
                             android:padding="10.0dip"
                             android:singleLine="true"
@@ -177,16 +217,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="100"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="100"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="50"
                             android:layout_gravity="center"
-                            android:text="Installment Type"/>
+                            android:layout_weight="50"
+                            android:text="Installment Type" />
 
                         <RadioGroup
                             android:id="@+id/group_installment_type"
@@ -216,42 +256,42 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:id="@+id/paid"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@drawable/edittextanimation"-->
-<!--                            android:focusableInTouchMode="true"-->
-<!--                            android:hint="Paid"-->
-<!--                            android:imeOptions="actionUnspecified"-->
-<!--                            android:inputType="number"-->
-<!--                            android:focusable="false"-->
-<!--                            android:maxLines="1"-->
-<!--                            android:padding="10.0dip"-->
-<!--                            android:singleLine="true"-->
-<!--                            android:textColor="@color/input_register_bg" />-->
+                        <!--                        <com.google.android.material.textfield.TextInputEditText-->
+                        <!--                            android:id="@+id/paid"-->
+                        <!--                            android:layout_width="match_parent"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:background="@drawable/edittextanimation"-->
+                        <!--                            android:focusableInTouchMode="true"-->
+                        <!--                            android:hint="Paid"-->
+                        <!--                            android:imeOptions="actionUnspecified"-->
+                        <!--                            android:inputType="number"-->
+                        <!--                            android:focusable="false"-->
+                        <!--                            android:maxLines="1"-->
+                        <!--                            android:padding="10.0dip"-->
+                        <!--                            android:singleLine="true"-->
+                        <!--                            android:textColor="@color/input_register_bg" />-->
 
                     </com.google.android.material.textfield.TextInputLayout>
 
 
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
+                    <!--                    <com.google.android.material.textfield.TextInputLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content">-->
 
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:id="@+id/remaining_amount"-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:background="@drawable/edittextanimation"-->
-<!--                            android:hint="Remaining Amount"-->
-<!--                            android:focusable="false"-->
-<!--                            android:inputType="number"-->
-<!--                            android:maxLines="1"-->
-<!--                            android:padding="10.0dip"-->
-<!--                            android:singleLine="true"-->
-<!--                            android:textColor="@color/input_register_bg" />-->
+                    <!--                        <com.google.android.material.textfield.TextInputEditText-->
+                    <!--                            android:id="@+id/remaining_amount"-->
+                    <!--                            android:layout_width="match_parent"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:background="@drawable/edittextanimation"-->
+                    <!--                            android:hint="Remaining Amount"-->
+                    <!--                            android:focusable="false"-->
+                    <!--                            android:inputType="number"-->
+                    <!--                            android:maxLines="1"-->
+                    <!--                            android:padding="10.0dip"-->
+                    <!--                            android:singleLine="true"-->
+                    <!--                            android:textColor="@color/input_register_bg" />-->
 
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
+                    <!--                    </com.google.android.material.textfield.TextInputLayout>-->
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -262,10 +302,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
+                            android:focusable="false"
                             android:focusableInTouchMode="true"
                             android:hint="Agent Name"
                             android:imeOptions="actionUnspecified"
-                            android:focusable="false"
                             android:inputType="text"
                             android:maxLines="1"
                             android:padding="10.0dip"
@@ -277,16 +317,16 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="100"
                         android:layout_marginTop="10dp"
+                        android:layout_weight="100"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="50"
                             android:layout_gravity="center"
-                            android:text="Comission Status"/>
+                            android:layout_weight="50"
+                            android:text="Comission Status" />
 
                         <RadioGroup
                             android:id="@+id/group_agent_comission"
@@ -334,10 +374,6 @@
                 android:layout_gravity="center|bottom"
                 android:layout_marginBottom="20dp"
                 android:visibility="gone" />
-
-
-
-
 
 
         </LinearLayout>

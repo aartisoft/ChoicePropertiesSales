@@ -105,7 +105,7 @@
                                 android:id="@+id/txt_number"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Payed Amount"
+                                android:text="Total Amount"
                                 android:textColor="@color/Black"
                                 android:layout_weight="60"
                                 android:textSize="14dp" />
@@ -131,7 +131,7 @@
                                 android:id="@+id/txt_status"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Remaining Amount"
+                                android:text="Agent Name"
                                 android:textColor="@color/Black"
                                 android:layout_weight="60"
                                 android:textSize="14dp" />
