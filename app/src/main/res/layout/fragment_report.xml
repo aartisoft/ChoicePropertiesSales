@@ -127,7 +127,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Total Sold Plots"
+                                    android:text="Total Plots"
                                     android:textColor="@color/input_register_bg"
                                     android:textSize="14sp" />
 
@@ -169,7 +169,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Approved orders"
+                                    android:text="Sold Plots"
                                     android:textColor="@color/input_register_bg"
                                     android:textSize="14sp" />
 
@@ -210,7 +210,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Completed orders"
+                                    android:text="Remaining Plots"
                                     android:textColor="@color/input_register_bg"
                                     android:textSize="14sp" />
 

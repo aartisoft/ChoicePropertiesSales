@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -59,17 +60,17 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
         }
         if (plots.getCustomerNmae() != null) {
             holder.txtAddress.setText(": " + searchArrayList.get(position).getCustomerNmae());
-        }else {
+        } else {
             holder.txtAddress.setText("Null");
         }
         if (plots.getPlotPrice() != null) {
             holder.txtNumber.setText(": " + searchArrayList.get(position).getPlotPrice());
-        }else {
+        } else {
             holder.txtNumber.setText("Null");
         }
         if (plots.getAgentName() != null) {
             holder.txtStatus.setText(": " + searchArrayList.get(position).getAgentName());
-        }else {
+        } else {
             holder.txtStatus.setText("Null");
         }
 
@@ -78,8 +79,18 @@ public class Reports_Adapter extends RecyclerView.Adapter<Reports_Adapter.ViewHo
         holder.card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog1 = new Dialog(holder.card_view.getContext());
-                dialog1.setContentView(R.layout.dialogeditnotice);
+                final Dialog dialog = new Dialog(holder.card_view.getContext());
+                dialog.setContentView(R.layout.dialogeditnotice);
+
+                Button btnYes = (Button) dialog.findViewById(R.id.dialogButtoncancle);
+                btnYes.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
             }
         });
     }
