@@ -100,7 +100,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/edittextanimation"
-                            android:hint="Note"
+                            android:hint="Attended By"
                             android:inputType="textMultiLine"
                             android:maxLines="1"
                             android:padding="10.0dip"

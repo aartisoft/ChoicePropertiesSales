@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent">
 
     <RelativeLayout
         android:id="@+id/layouttop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/view_dropshadow2"
-        android:gravity="center_horizontal" >
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal">
 
         <TextView
             android:id="@+id/textheader"
@@ -17,8 +17,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="5sp"
             android:gravity="center_horizontal"
-            android:paddingBottom="9dp"
             android:paddingTop="9dp"
+            android:paddingBottom="9dp"
             android:text="Plot Details"
             android:textColor="#ffffff"
             android:textSize="18sp"
@@ -29,10 +29,10 @@
         android:id="@+id/details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/layouttop"
         android:layout_margin="5dp"
         android:orientation="horizontal"
         android:padding="10dp"
-        android:layout_below="@+id/layouttop"
         android:weightSum="100">
 
 
@@ -45,43 +45,43 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_plot_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="60"
                     android:text="Plot Number "
                     android:textColor="@color/Black"
-                    android:layout_weight="60"
                     android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/txt_plot_number_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Id:"
                     android:layout_weight="40"
+                    android:text="Id:"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_customer_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Customer Name"
                     android:layout_weight="60"
+                    android:text="Customer Name"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
@@ -89,8 +89,8 @@
                     android:id="@+id/txt_customer_name_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="C Name:"
                     android:layout_weight="40"
+                    android:text="C Name:"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
@@ -100,24 +100,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_total_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="60"
                     android:text="Total Amount"
                     android:textColor="@color/Black"
-                    android:layout_weight="60"
                     android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/txt_total_amount_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Bank:"
                     android:layout_weight="40"
+                    android:text="Bank:"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
@@ -126,24 +126,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_sold_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="60"
                     android:text="Sold Date"
                     android:textColor="@color/Black"
-                    android:layout_weight="60"
                     android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/txt_sold_date_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LAP"
                     android:layout_weight="40"
+                    android:text="LAP"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
@@ -152,24 +152,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_paid_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="60"
                     android:text="Paid Amount"
                     android:textColor="@color/Black"
-                    android:layout_weight="60"
                     android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/txt_paid_amount_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LAP"
                     android:layout_weight="40"
+                    android:text="LAP"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
@@ -178,24 +178,24 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_panding_amount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="60"
                     android:text="Pending Amount"
                     android:textColor="@color/Black"
-                    android:layout_weight="60"
                     android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/txt_panding_amount_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LAP"
                     android:layout_weight="40"
+                    android:text="LAP"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
@@ -204,30 +204,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="100"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="100">
 
                 <TextView
                     android:id="@+id/txt_agent_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="60"
                     android:text="Agent Name"
                     android:textColor="@color/Black"
-                    android:layout_weight="60"
                     android:textSize="14dp" />
 
                 <TextView
                     android:id="@+id/txt_agent_name_value"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="LAP"
                     android:layout_weight="40"
+                    android:text="LAP"
                     android:textColor="@color/Black"
                     android:textSize="14dp" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>
@@ -238,15 +236,16 @@
     <LinearLayout
         android:id="@+id/layoutbuttons"
         android:layout_width="match_parent"
-        android:layout_height="40sp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/details"
         android:gravity="center_horizontal"
-        android:weightSum="100" >
+        android:weightSum="100">
 
         <Button
             android:id="@+id/dialogButtoncancle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="50"
             android:background="@drawable/view_dropshadow2"
             android:hint="Enter Notice Name"

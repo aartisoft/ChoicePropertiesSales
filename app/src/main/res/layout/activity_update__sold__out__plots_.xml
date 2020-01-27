@@ -42,6 +42,36 @@
                         android:weightSum="90">
 
                         <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
+                            android:id="@+id/card_view_total"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            xmlns:app="http://schemas.android.com/apk/res-auto"
+                            xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="10dp"
+                            app:cardBackgroundColor="@color/card_color2"
+                            android:layout_weight="30"
+                            android:layout_margin="2dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Total Price" />
+
+                            <TextView
+                                android:id="@+id/Tamount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:layout_margin="20dp"
+                                android:text="T Amount" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
                             android:id="@+id/card_view_remaining"
                             xmlns:android="http://schemas.android.com/apk/res/android"
                             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -52,6 +82,12 @@
                             app:cardBackgroundColor="@color/card_color1"
                             android:layout_weight="30"
                             android:layout_margin="2dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Remaining Amount" />
 
                             <TextView
                                 android:id="@+id/Ramount"
@@ -78,6 +114,12 @@
                             android:layout_margin="2dp">
 
                             <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Payed Amount" />
+
+                            <TextView
                                 android:id="@+id/Pamount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -88,31 +130,6 @@
                                 android:text="R Amount" />
 
                         </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView xmlns:card_view="https://schemas.android.com/apk/res-auto"
-                            android:id="@+id/card_view_total"
-                            xmlns:android="http://schemas.android.com/apk/res/android"
-                            xmlns:app="http://schemas.android.com/apk/res-auto"
-                            xmlns:tools="http://schemas.android.com/tools"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:cardCornerRadius="10dp"
-                            app:cardBackgroundColor="@color/card_color2"
-                            android:layout_weight="30"
-                            android:layout_margin="2dp">
-
-                            <TextView
-                                android:id="@+id/Tamount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center"
-                                android:gravity="center"
-                                android:layout_margin="20dp"
-                                android:text="T Amount" />
-
-                        </androidx.cardview.widget.CardView>
-
 
                     </LinearLayout>
 

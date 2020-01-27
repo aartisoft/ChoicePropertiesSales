@@ -15,7 +15,7 @@ public class Customer implements Serializable {
     private String name;
     private String address;
     private String mobile;
-    private String note;
+    private String attendedBy;
     private String dateTime;
     private String discussion;
     private String customerId;
@@ -63,12 +63,12 @@ public class Customer implements Serializable {
         this.mobile = mobile;
     }
 
-    public String getNote() {
-        return note;
+    public String getAttendedBy() {
+        return attendedBy;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    public void setAttendedBy(String attendedBy) {
+        this.attendedBy = attendedBy;
     }
 
     public String getDateTime() {
@@ -102,7 +102,7 @@ public class Customer implements Serializable {
         result.put("name", name);
         result.put("address", address);
         result.put("mobile", mobile);
-        result.put("note", note);
+        result.put("attendedBy", attendedBy);
         result.put("dateTime", dateTime);
         result.put("discussion", discussion);
         result.put("customerId", customerId);

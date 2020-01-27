@@ -156,15 +156,16 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
 
             if (v == btnAdd) {
                 progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-                final Plots plots = fillUserModel();
+                String plotnumber = spinnerPlotNumber.getSelectedItem().toString();
 
-                userRepository.readPlotsByPlotNumber(plots.getPlotnumber(), new CallBack() {
+                userRepository.readPlotsByPlotNumber(plotnumber, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
                         if (object != null){
                             Plots plots1 = (Plots) object;
                             String plotId = plots1.getPloteId();
 
+                            final Plots plots = fillUserModel(plots1.getPlotarea());
                             ref.child(plotId).removeValue();
                             SalePlot(plots);
                         }
@@ -212,7 +213,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
     }
 
 
-    private Plots fillUserModel() {
+    private Plots fillUserModel(String area) {
         Plots plots = new Plots();
         plots.setPlotnumber(spinnerPlotNumber.getSelectedItem().toString());
         plots.setCustomerNmae(inputCustomerName.getText().toString());
@@ -224,6 +225,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         plots.setPayedAmount(inputPaidAmount.getText().toString());
         plots.setAgentName(inputAgentName.getText().toString());
         plots.setComissionStatus(Scomission);
+        plots.setPlotarea(area);
         plots.setStatus(Constant.STATUS_PLOT_SOLD);
 
         plots.setPloteId(Constant.SOLD_PLOT_TABLE_REF.push().getKey());

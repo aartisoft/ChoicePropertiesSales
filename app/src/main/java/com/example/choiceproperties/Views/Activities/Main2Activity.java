@@ -55,8 +55,8 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
         menuItems.add(new MenuItem("Requests",R.color.Black));
         menuItems.add(new MenuItem("Add Customers",R.color.Black));
         menuItems.add(new MenuItem("Add Plots",R.color.Black));
-        menuItems.add(new MenuItem("Accept Sales Requests",R.color.Black));
         menuItems.add(new MenuItem("Sale Plot",R.color.Black));
+        menuItems.add(new MenuItem("Accept Sales Requests",R.color.Black));
         menuItems.add(new MenuItem("Sold Out Plot",R.color.Black));
         menuItems.add(new MenuItem("Reports",R.color.Black));
         menuItems.add(new MenuItem("Log Out",R.color.Black));
@@ -97,12 +97,12 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                     }
                     case 3:{
                         color1 = R.color.green;
-                        fragmentClass = Admin_Sales__Tab_Fragment.class;
+                        fragmentClass = Fragment_Sale_Plots.class;
                         break;
                     }
                     case 4:{
                         color1 = R.color.green;
-                        fragmentClass = Fragment_Sale_Plots.class;
+                        fragmentClass = Admin_Sales__Tab_Fragment.class;
                         break;
                     }
                     case 5:{
