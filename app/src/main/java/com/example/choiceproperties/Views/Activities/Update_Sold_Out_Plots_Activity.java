@@ -48,11 +48,11 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
     int previousRemainingAmount, previousPayedAmount;
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,21 +61,19 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        progressDialogClass = new ProgressDialogClass(this);
+        leedRepository = new LeedRepositoryImpl();
 
         plots = (Plots) getIntent().getSerializableExtra(Constant.PLOTS);
 
         previousPayedAmount = Integer.parseInt(plots.getPayedAmount());
         previousRemainingAmount = Integer.parseInt(plots.getRemainingAmount());
 
-        leedRepository = new LeedRepositoryImpl();
-
         inputPlotNumber = (EditText) findViewById(R.id.plot_number);
         inputCustomerName = (EditText) findViewById(R.id.customer_name);
         inputSalePrice = (EditText) findViewById(R.id.plot_salling_price);
         inputDepositAmount = (EditText) findViewById(R.id.deposit_amount);
-//        inputRemainingAmount = (EditText) findViewById(R.id.remaining_amount);
         inputInstallment = (EditText) findViewById(R.id.installment);
-//        inputPaidAmount = (EditText) findViewById(R.id.paid);
         inputAgentName = (EditText) findViewById(R.id.agent_name);
 
         GroupInsatllment = (RadioGroup) findViewById(R.id.group_installment_type);
@@ -207,7 +205,7 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
     }
 
     private void updateLeed(String leedId, Map leedsMap) {
-
+        progressDialogClass.showDialog(String.valueOf(R.string.loading), String.valueOf(R.string.PLEASE_WAIT));
         leedRepository = new LeedRepositoryImpl();
         leedRepository.updatePlot(leedId, leedsMap, new CallBack() {
             @Override
@@ -215,12 +213,14 @@ public class Update_Sold_Out_Plots_Activity extends AppCompatActivity implements
                 Toast.makeText(Update_Sold_Out_Plots_Activity.this, "Plot Updated SuccessFully", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Update_Sold_Out_Plots_Activity.this, Main2Activity.class);
                 startActivity(intent);
+                progressDialogClass.dismissDialog();
             }
 
             @Override
             public void onError(Object object) {
 
                 Utility.showLongMessage(getApplication(), getString(R.string.server_error));
+                progressDialogClass.dismissDialog();
 
             }
         });
