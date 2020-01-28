@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.choiceproperties_sales.CallBack.CallBack;
+import com.example.choiceproperties_sales.Constant.Constant;
 import com.example.choiceproperties_sales.Exception.ExceptionUtil;
 import com.example.choiceproperties_sales.Models.User;
 import com.example.choiceproperties_sales.R;
@@ -116,11 +117,15 @@ public class LoginScreen extends AppCompatActivity {
                         User user = postSnapshot.getValue(User.class);
 
                         progressDialog.dismissDialog();
-                        String userid = user.getUserId();
-                        appSharedPreference.createUserLoginSession();
-                        appSharedPreference.addUserDetails(user);
-                        Toast.makeText(LoginScreen.this, "Login Successfull", Toast.LENGTH_SHORT).show();
-                        LoginToApp();
+                        if (user.getStatus().equalsIgnoreCase(Constant.STATUS_ACTIVE)) {
+                            String userid = user.getUserId();
+                            appSharedPreference.createUserLoginSession();
+                            appSharedPreference.addUserDetails(user);
+                            Toast.makeText(LoginScreen.this, "Login Successfull", Toast.LENGTH_SHORT).show();
+                            LoginToApp();
+                        }else {
+                            Toast.makeText(LoginScreen.this, "Sorry Youe Account is Not Active", Toast.LENGTH_SHORT).show();
+                        }
 
                         //                        signInUserData(userid);
 
