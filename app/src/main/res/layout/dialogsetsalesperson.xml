@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout
+        android:id="@+id/layouttop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/textheader"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5sp"
+            android:gravity="center_horizontal"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:text="Plot Details"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_Edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layouttop">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layouttop"
+            android:layout_margin="10dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_attended_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittextanimation"
+                android:padding="10dp"
+                android:hint="Set Sales Person Name" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutbuttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_Edit"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <Button
+            android:id="@+id/dialogButtoncancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:background="@drawable/view_dropshadow2"
+            android:hint="Enter Notice Name"
+            android:text="Cancle"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+
+        <Button
+            android:id="@+id/dialogButtonupdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="50"
+            android:background="@drawable/view_dropshadow2"
+            android:hint="Enter Notice Name"
+            android:text="Update"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="normal|bold" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,20 +1,29 @@
 package com.example.choiceproperties_sales.Views.Adapters;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.choiceproperties_sales.CallBack.CallBack;
+import com.example.choiceproperties_sales.Constant.Constant;
 import com.example.choiceproperties_sales.Models.Customer;
 import com.example.choiceproperties_sales.Models.Requests;
 import com.example.choiceproperties_sales.R;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties_sales.repository.LeedRepository;
+import com.example.choiceproperties_sales.repository.UserRepository;
+import com.example.choiceproperties_sales.repository.impl.LeedRepositoryImpl;
+import com.example.choiceproperties_sales.repository.impl.UserRepositoryImpl;
 
 import java.util.List;
 
@@ -24,7 +33,7 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
     private Context context;
     private boolean isFromRequest;
     ProgressDialogClass progressDialogClass;
-    LeedRepository leedRepository;
+    UserRepository userRepository;
 
     public Sales_Customer_Verified_Requests_Adapter(Context context, List<Requests> userArrayList, boolean isFromRequest) {
         this.context = context;
@@ -46,6 +55,7 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
     public void onBindViewHolder(final Sales_Customer_Verified_Requests_Adapter.ViewHolder holder, int position) {
         final Requests request = searchArrayList.get(position);
 
+        userRepository = new UserRepositoryImpl();
         if (request.getName() != null) {
             holder.txtCustomerName.setText(": " + searchArrayList.get(position).getName());
         } else {
@@ -70,7 +80,50 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
         holder.card_view_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Customer customer = new Customer();
+
+                final Dialog dialog = new Dialog(holder.card_view.getContext());
+                dialog.setContentView(R.layout.dialogsetsalesperson);
+
+                Button btnUpdate = (Button) dialog.findViewById(R.id.dialogButtonupdate);
+                Button btnCancle = (Button) dialog.findViewById(R.id.dialogButtoncancle);
+                final EditText SalesPerson = (EditText) dialog.findViewById(R.id.edit_attended_by);
+
+                btnUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Customer customer = new Customer();
+                        customer.setAddress(request.getAddress());
+                        customer.setDiscussion(request.getMessage());
+                        customer.setMobile(request.getMobile());
+                        customer.setName(request.getName());
+                        customer.setStatus(Constant.STATUS_REQUEST_VISITED);
+                        customer.setCustomerId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
+                        customer.setCreatedDateTime(request.getCreatedDateTimeLong());
+                        customer.setAttendedBy(SalesPerson.getText().toString());
+
+                        userRepository.createCustomer(customer, new CallBack() {
+                            @Override
+                            public void onSuccess(Object object) {
+                                Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+
+                            @Override
+                            public void onError(Object object) {
+
+                            }
+                        });
+                    }
+                });
+
+                btnCancle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
             }
         });
     }
