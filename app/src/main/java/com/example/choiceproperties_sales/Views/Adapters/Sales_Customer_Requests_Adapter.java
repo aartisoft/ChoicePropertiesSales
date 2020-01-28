@@ -10,12 +10,18 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.choiceproperties_sales.CallBack.CallBack;
+import com.example.choiceproperties_sales.Constant.Constant;
 import com.example.choiceproperties_sales.Models.Requests;
+import com.example.choiceproperties_sales.Models.User;
 import com.example.choiceproperties_sales.R;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties_sales.repository.LeedRepository;
+import com.example.choiceproperties_sales.repository.impl.LeedRepositoryImpl;
+import com.example.choiceproperties_sales.utilities.Utility;
 
 import java.util.List;
+import java.util.Map;
 
 public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_Customer_Requests_Adapter.ViewHolder> {
 
@@ -44,6 +50,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
     @Override
     public void onBindViewHolder(final Sales_Customer_Requests_Adapter.ViewHolder holder, int position) {
         final Requests request = searchArrayList.get(position);
+        leedRepository = new LeedRepositoryImpl();
 
         if (request.getName() != null) {
             holder.txtCustomerName.setText(": " + searchArrayList.get(position).getName());
@@ -69,7 +76,28 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
         holder.card_view_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setLeedStatus(request);
+            }
 
+            private void setLeedStatus(Requests requests) {
+                requests.setStatus(Constant.STATUS_REQUEST_VERIFIED);
+                updateLeed(requests.getRequestId(), requests.getLeedStatusMap1());
+            }
+            private void updateLeed(String leedId, Map leedsMap) {
+
+                leedRepository.updateRequest(leedId, leedsMap, new CallBack() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Object object) {
+                        Context context1 = context;
+                        Utility.showLongMessage(context1, context1.getString(R.string.server_error));
+
+                    }
+                });
             }
         });
     }

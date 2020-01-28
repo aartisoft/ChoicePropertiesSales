@@ -17,7 +17,8 @@ public interface LeedRepository {
 
     void updateUser(final String leedId, final Map leedMap, final CallBack callback);
 
-
     void updatePlot(final String leedId, final Map leedMap, final CallBack callback);
+
+    void updateRequest(final String leedId, final Map leedMap, final CallBack callback);
 
 }
