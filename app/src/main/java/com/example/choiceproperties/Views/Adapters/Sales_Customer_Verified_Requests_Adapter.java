@@ -17,7 +17,7 @@ import com.example.choiceproperties.repository.LeedRepository;
 
 import java.util.List;
 
-public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_Customer_Requests_Adapter.ViewHolder> {
+public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapter<Sales_Customer_Verified_Requests_Adapter.ViewHolder> {
 
     private static List<Requests> searchArrayList;
     private Context context;
@@ -25,24 +25,24 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
     ProgressDialogClass progressDialogClass;
     LeedRepository leedRepository;
 
-    public Sales_Customer_Requests_Adapter(Context context, List<Requests> userArrayList, boolean isFromRequest) {
+    public Sales_Customer_Verified_Requests_Adapter(Context context, List<Requests> userArrayList, boolean isFromRequest) {
         this.context = context;
         this.searchArrayList = userArrayList;
         this.isFromRequest = isFromRequest;
     }
 
     @Override
-    public Sales_Customer_Requests_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Sales_Customer_Verified_Requests_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.sales_generated_requests_adapter_layout, parent, false);
-        Sales_Customer_Requests_Adapter.ViewHolder viewHolder = new ViewHolder(v);
+                .inflate(R.layout.sales_verified_requests_adapter_layout, parent, false);
+        Sales_Customer_Verified_Requests_Adapter.ViewHolder viewHolder = new ViewHolder(v);
         //  context = parent.getContext();
         return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(final Sales_Customer_Requests_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final Sales_Customer_Verified_Requests_Adapter.ViewHolder holder, int position) {
         final Requests request = searchArrayList.get(position);
 
         if (request.getName() != null) {

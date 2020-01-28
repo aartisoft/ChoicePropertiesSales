@@ -19,6 +19,7 @@ import com.example.choiceproperties.Views.Fragments.Fragment_Add_Plots;
 import com.example.choiceproperties.Views.Fragments.Fragment_Reports;
 import com.example.choiceproperties.Views.Fragments.Fragment_Sale_Plots;
 import com.example.choiceproperties.Views.Fragments.Fragment_Sold_Out_Plots;
+import com.example.choiceproperties.Views.Fragments.Requests__Tab_Fragment;
 import com.example.choiceproperties.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.example.choiceproperties.interfaces.OnFragmentInteractionListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -61,7 +62,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
         menuItems.add(new MenuItem("Reports",R.color.Black));
         menuItems.add(new MenuItem("Log Out",R.color.Black));
         sNavigationDrawer.setMenuItemList(menuItems);
-        fragmentClass =  Sales_Customer_Requests_Fragment.class;
+        fragmentClass =  Requests__Tab_Fragment.class;
         try {
             fragment = (Fragment) fragmentClass.newInstance();
         } catch (Exception e) {
@@ -81,7 +82,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                 switch (position){
                     case 0:{
                         color1 = R.color.red;
-                        fragmentClass = Sales_Customer_Requests_Fragment.class;
+                        fragmentClass = Requests__Tab_Fragment.class;
                         break;
                     }
                     case 1:{

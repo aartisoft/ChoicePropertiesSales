@@ -19,6 +19,7 @@ public class Customer implements Serializable {
     private String dateTime;
     private String discussion;
     private String customerId;
+    private String status;
     private Long createdDateTime;
 
 
@@ -95,6 +96,13 @@ public class Customer implements Serializable {
         this.customerId = customerId;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Exclude
     public Map<String, Object> toMap() {
@@ -106,6 +114,7 @@ public class Customer implements Serializable {
         result.put("dateTime", dateTime);
         result.put("discussion", discussion);
         result.put("customerId", customerId);
+        result.put("status", status);
         result.put("createdDateTime", getCreatedDateTime());
 
         return result;

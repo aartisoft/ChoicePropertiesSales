@@ -125,6 +125,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         customer.setAttendedBy(inputNote.getText().toString());
         customer.setDateTime(inputDateTime.getText().toString());
         customer.setDiscussion(inputDiscussion.getText().toString());
+        customer.setStatus(Constant.STATUS_REQUEST_VISITED);
         customer.setCustomerId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
 
         return customer;

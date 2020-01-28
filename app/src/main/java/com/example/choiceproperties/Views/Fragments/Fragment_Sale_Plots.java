@@ -43,7 +43,7 @@ import java.util.Date;
 public class Fragment_Sale_Plots extends Fragment implements View.OnClickListener {
 
     EditText  inputCustomerName, inputSalePrice, inputDepositAmount, inputRemainingAmount,
-            inputPaidAmount, inputAgentName;
+             inputAgentName;
     RadioGroup GroupDeposite, GroupComission;
     RadioButton Rdeposite, Rcomission, radioCash, radioPaid;
     Button btnAdd;
@@ -81,7 +81,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         inputSalePrice = (EditText) view.findViewById(R.id.plot_salling_price);
         inputDepositAmount = (EditText) view.findViewById(R.id.deposit_amount);
         inputRemainingAmount = (EditText) view.findViewById(R.id.remaining_amount);
-        inputPaidAmount = (EditText) view.findViewById(R.id.paid);
+//        inputPaidAmount = (EditText) view.findViewById(R.id.paid);
         inputAgentName = (EditText) view.findViewById(R.id.agent_name);
 
         GroupDeposite = (RadioGroup) view.findViewById(R.id.group_installment_type);
@@ -194,7 +194,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
                 inputSalePrice.setText("");
                 inputDepositAmount.setText("");
                 inputRemainingAmount.setText("");
-                inputPaidAmount.setText("");
+//                inputPaidAmount.setText("");
                 inputAgentName.setText("");
                 radioCash.setChecked(true);
                 radioPaid.setChecked(true);
@@ -220,7 +220,7 @@ public class Fragment_Sale_Plots extends Fragment implements View.OnClickListene
         plots.setDepositType(Sdeposite);
         plots.setRemainingAmount(inputRemainingAmount.getText().toString());
 //        plots.setInstallmentType(Sinstallment);
-        plots.setPayedAmount(inputPaidAmount.getText().toString());
+        plots.setPayedAmount(inputDepositAmount.getText().toString());
         plots.setAgentName(inputAgentName.getText().toString());
         plots.setComissionStatus(Scomission);
         plots.setPlotarea(area);

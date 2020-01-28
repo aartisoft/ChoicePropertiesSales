@@ -101,7 +101,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Balance Amount" />
+                                    android:text="Remaining Amount" />
 
                                 <TextView
                                     android:id="@+id/Ramount"
@@ -138,7 +138,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
-                                    android:text="Payed Amount" />
+                                    android:text="Received Amount" />
 
                                 <TextView
                                     android:id="@+id/Pamount"

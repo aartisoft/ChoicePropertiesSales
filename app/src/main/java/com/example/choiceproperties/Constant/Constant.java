@@ -57,6 +57,7 @@ public class Constant {
 
     public static final String STATUS_REQUEST_GENERATED = "GENERATED";
     public static final String STATUS_REQUEST_VERIFIED = "VERIFIED";
+    public static final String STATUS_REQUEST_VISITED = "VISITED";
 
     public static final String STATUS_PLOT_AVAILABLE = "AVAILABLE";
     public static final String STATUS_PLOT_SOLD = "SOLD";

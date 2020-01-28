@@ -220,4 +220,32 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
         });
     }
 
+    @Override
+    public void readVisitedCustomers(final CallBack callBack) {
+        final Query query = Constant.CUSTOMERS_TABLE_REF;
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        ArrayList<Customer> leedsModelArrayList = new ArrayList<>();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            Customer customer = suggestionSnapshot.getValue(Customer.class);
+                            leedsModelArrayList.add(customer);
+                        }
+                        callBack.onSuccess(leedsModelArrayList);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
 }
