@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.choiceproperties_sales.Models.Customer;
 import com.example.choiceproperties_sales.Models.Requests;
 import com.example.choiceproperties_sales.R;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
@@ -66,8 +67,12 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
             holder.txtStatus.setText(": Null");
         }
 
-//        holder.txtbilldate.setText(": "+ Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
-
+        holder.card_view_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Customer customer = new Customer();
+            }
+        });
     }
 
 
@@ -79,7 +84,7 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtCustomerName, txtAddress, txtNumber, txtStatus;
-        CardView card_view;
+        CardView card_view,card_view_status;
         LinearLayout layout;
 
         public ViewHolder(View itemView) {
@@ -91,6 +96,7 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
             txtNumber = (TextView) itemView.findViewById(R.id.txt_number_value);
             txtStatus = (TextView) itemView.findViewById(R.id.txt_status_value);
             card_view = (CardView) itemView.findViewById(R.id.card_view);
+            card_view_status = (CardView) itemView.findViewById(R.id.card_view_status);
 //            layout = (LinearLayout) itemView.findViewById(R.id.layoutdetails);
 
         }

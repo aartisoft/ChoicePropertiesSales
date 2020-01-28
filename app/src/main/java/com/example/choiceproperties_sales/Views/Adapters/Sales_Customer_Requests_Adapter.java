@@ -52,22 +52,26 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
         }
         if (request.getAddress() != null) {
             holder.txtAddress.setText(": " + searchArrayList.get(position).getAddress());
-        }else {
+        } else {
             holder.txtAddress.setText(": Null");
         }
         if (request.getMobile() != null) {
             holder.txtNumber.setText(": " + searchArrayList.get(position).getMobile());
-        }else {
+        } else {
             holder.txtNumber.setText(": Null");
         }
         if (request.getStatus() != null) {
             holder.txtStatus.setText(": " + searchArrayList.get(position).getStatus());
-        }else {
+        } else {
             holder.txtStatus.setText(": Null");
         }
 
-//        holder.txtbilldate.setText(": "+ Utility.convertMilliSecondsToFormatedDate(searchArrayList.get(position).getCreatedDateTimeLong(), GLOBAL_DATE_FORMATE));
+        holder.card_view_status.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
     }
 
 
@@ -79,7 +83,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtCustomerName, txtAddress, txtNumber, txtStatus;
-        CardView card_view;
+        CardView card_view, card_view_status;
         LinearLayout layout;
 
         public ViewHolder(View itemView) {
@@ -91,6 +95,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
             txtNumber = (TextView) itemView.findViewById(R.id.txt_number_value);
             txtStatus = (TextView) itemView.findViewById(R.id.txt_status_value);
             card_view = (CardView) itemView.findViewById(R.id.card_view);
+            card_view_status = (CardView) itemView.findViewById(R.id.card_view_status);
 //            layout = (LinearLayout) itemView.findViewById(R.id.layoutdetails);
 
         }
