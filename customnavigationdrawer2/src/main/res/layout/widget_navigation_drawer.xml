@@ -81,7 +81,7 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
                     android:gravity="center"
-                    android:text="Choice Properties"
+                    android:text="Choice Properties Sales"
                     android:textStyle="bold" />
             </RelativeLayout>
 
