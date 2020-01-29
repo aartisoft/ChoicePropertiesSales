@@ -157,7 +157,6 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
         });
     }
 
-
     @Override
     public int getItemCount() {
         return searchArrayList.size();

@@ -1,16 +1,23 @@
 package com.example.choiceproperties_sales.Views.Adapters;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.choiceproperties_sales.CallBack.CallBack;
@@ -38,6 +45,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
     ProgressDialogClass progressDialogClass;
     LeedRepository leedRepository;
     UserRepository userRepository;
+    private static final int REQUEST_PHONE_CALL = 1;
 
     public Sales_Customer_Requests_Adapter(Context context, List<Requests> userArrayList) {
         this.context = context;
@@ -130,6 +138,28 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
                 });
             }
         });
+
+        holder.imgCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String number = request.getMobile();
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + number));
+                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.CALL_PHONE},REQUEST_PHONE_CALL);
+                    holder.card_view_status.getContext().startActivity(intent);
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }else {
+                    holder.card_view_status.getContext().startActivity(intent);
+                }
+            }
+        });
     }
 
 
@@ -143,6 +173,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
         TextView txtCustomerName, txtAddress, txtNumber, txtStatus;
         CardView card_view, card_view_status;
         LinearLayout layout;
+        ImageView imgCall;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -154,6 +185,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
             txtStatus = (TextView) itemView.findViewById(R.id.txt_status_value);
             card_view = (CardView) itemView.findViewById(R.id.card_view);
             card_view_status = (CardView) itemView.findViewById(R.id.card_view_status);
+            imgCall = (ImageView) itemView.findViewById(R.id.client_call);
 //            layout = (LinearLayout) itemView.findViewById(R.id.layoutdetails);
 
         }
