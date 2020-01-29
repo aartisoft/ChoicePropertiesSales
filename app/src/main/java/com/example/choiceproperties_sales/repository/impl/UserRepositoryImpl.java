@@ -248,4 +248,32 @@ public class UserRepositoryImpl extends FirebaseTemplateRepository implements Us
         });
     }
 
+    @Override
+    public void readRequestByNumber(String Number, final CallBack callBack) {
+        final Query query = Constant.PLOT_TABLE_REF.orderByChild("mobile").equalTo(Number);
+        fireBaseNotifyChange(query, new CallBack() {
+            @Override
+            public void onSuccess(Object object) {
+                if (object != null) {
+                    DataSnapshot dataSnapshot = (DataSnapshot) object;
+                    if (dataSnapshot.getValue() != null & dataSnapshot.hasChildren()) {
+                        Plots plots = new Plots();
+                        for (DataSnapshot suggestionSnapshot : dataSnapshot.getChildren()) {
+                            plots = suggestionSnapshot.getValue(Plots.class);
+
+                        }
+                        callBack.onSuccess(plots);
+                    } else {
+                        callBack.onSuccess(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onError(Object object) {
+                callBack.onError(object);
+            }
+        });
+    }
+
 }

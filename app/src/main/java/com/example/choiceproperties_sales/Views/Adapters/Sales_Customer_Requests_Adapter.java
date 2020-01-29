@@ -1,6 +1,7 @@
 package com.example.choiceproperties_sales.Views.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +20,13 @@ import com.example.choiceproperties_sales.Models.User;
 import com.example.choiceproperties_sales.R;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties_sales.repository.LeedRepository;
+import com.example.choiceproperties_sales.repository.UserRepository;
 import com.example.choiceproperties_sales.repository.impl.LeedRepositoryImpl;
+import com.example.choiceproperties_sales.repository.impl.UserRepositoryImpl;
 import com.example.choiceproperties_sales.utilities.Utility;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 import java.util.Map;
@@ -28,14 +35,13 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
 
     private static List<Requests> searchArrayList;
     private Context context;
-    private boolean isFromRequest;
     ProgressDialogClass progressDialogClass;
     LeedRepository leedRepository;
+    UserRepository userRepository;
 
-    public Sales_Customer_Requests_Adapter(Context context, List<Requests> userArrayList, boolean isFromRequest) {
+    public Sales_Customer_Requests_Adapter(Context context, List<Requests> userArrayList) {
         this.context = context;
         this.searchArrayList = userArrayList;
-        this.isFromRequest = isFromRequest;
     }
 
     @Override
@@ -52,6 +58,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
     public void onBindViewHolder(final Sales_Customer_Requests_Adapter.ViewHolder holder, int position) {
         final Requests request = searchArrayList.get(position);
         leedRepository = new LeedRepositoryImpl();
+        userRepository = new UserRepositoryImpl();
 
         if (request.getName() != null) {
             holder.txtCustomerName.setText(": " + searchArrayList.get(position).getName());
@@ -74,23 +81,45 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
             holder.txtStatus.setText(": Null");
         }
 
+
+
         holder.card_view_status.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setLeedStatus(request);
             }
 
-            private void setLeedStatus(Requests requests) {
-                requests.setStatus(Constant.STATUS_REQUEST_VERIFIED);
-                updateLeed(requests.getRequestId(), requests.getLeedStatusMap1());
+            private void setLeedStatus(final Requests requests) {
+
+                Constant.REQUESTS_TABLE_REF.orderByChild("requestId").equalTo(request.getRequestId())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot child : dataSnapshot.getChildren()) {
+
+                                    Toast.makeText(context, child.getKey(), Toast.LENGTH_SHORT).show();
+                                    Log.d("User key", child.getKey());
+                                    requests.setStatus(Constant.STATUS_REQUEST_VERIFIED);
+                                    updateLeed( child.getKey(), requests.getLeedStatusMap1());
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+
             }
+
             private void updateLeed(String leedId, Map leedsMap) {
 
                 leedRepository.updateRequest(leedId, leedsMap, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
                         Toast.makeText(context, "Verified", Toast.LENGTH_SHORT).show();
-                        notifyDataSetChanged();
                     }
 
                     @Override

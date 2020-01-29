@@ -138,7 +138,6 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
 
         TextView txtCustomerName, txtAddress, txtNumber, txtStatus;
         CardView card_view,card_view_status;
-        LinearLayout layout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -150,7 +149,6 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
             txtStatus = (TextView) itemView.findViewById(R.id.txt_status_value);
             card_view = (CardView) itemView.findViewById(R.id.card_view);
             card_view_status = (CardView) itemView.findViewById(R.id.card_view_status);
-//            layout = (LinearLayout) itemView.findViewById(R.id.layoutdetails);
 
         }
     }

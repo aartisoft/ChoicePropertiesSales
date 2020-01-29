@@ -73,7 +73,7 @@ public class Sales_Customer_Requests_Fragment extends Fragment implements Adapte
 
                 }
 
-                adapter = new Sales_Customer_Requests_Adapter(getActivity(), requestList, false);
+                adapter = new Sales_Customer_Requests_Adapter(getActivity(), requestList);
                 //adding adapter to recyclerview
                 listView.setAdapter(adapter);
                 listView.setHasFixedSize(true);
