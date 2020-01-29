@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,6 +89,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
                 leedRepository.updateRequest(leedId, leedsMap, new CallBack() {
                     @Override
                     public void onSuccess(Object object) {
+                        Toast.makeText(context, "Verified", Toast.LENGTH_SHORT).show();
                         notifyDataSetChanged();
                     }
 
