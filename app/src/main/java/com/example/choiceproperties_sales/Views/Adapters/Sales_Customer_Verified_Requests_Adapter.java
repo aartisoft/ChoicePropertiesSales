@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +25,11 @@ import com.example.choiceproperties_sales.repository.LeedRepository;
 import com.example.choiceproperties_sales.repository.UserRepository;
 import com.example.choiceproperties_sales.repository.impl.LeedRepositoryImpl;
 import com.example.choiceproperties_sales.repository.impl.UserRepositoryImpl;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
@@ -63,17 +69,17 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
         }
         if (request.getAddress() != null) {
             holder.txtAddress.setText(": " + searchArrayList.get(position).getAddress());
-        }else {
+        } else {
             holder.txtAddress.setText(": Null");
         }
         if (request.getMobile() != null) {
             holder.txtNumber.setText(": " + searchArrayList.get(position).getMobile());
-        }else {
+        } else {
             holder.txtNumber.setText(": Null");
         }
         if (request.getStatus() != null) {
             holder.txtStatus.setText(": " + searchArrayList.get(position).getStatus());
-        }else {
+        } else {
             holder.txtStatus.setText(": Null");
         }
 
@@ -88,31 +94,54 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
                 Button btnCancle = (Button) dialog.findViewById(R.id.dialogButtoncancle);
                 final EditText SalesPerson = (EditText) dialog.findViewById(R.id.edit_attended_by);
 
+                final DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Request");
+
                 btnUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Customer customer = new Customer();
-                        customer.setAddress(request.getAddress());
-                        customer.setDiscussion(request.getMessage());
-                        customer.setMobile(request.getMobile());
-                        customer.setName(request.getName());
-                        customer.setStatus(Constant.STATUS_REQUEST_VISITED);
-                        customer.setCustomerId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
-                        customer.setCreatedDateTime(request.getCreatedDateTimeLong());
-                        customer.setAttendedBy(SalesPerson.getText().toString());
 
-                        userRepository.createCustomer(customer, new CallBack() {
-                            @Override
-                            public void onSuccess(Object object) {
-                                Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
-                            }
+                        Constant.REQUESTS_TABLE_REF.orderByChild("requestId").equalTo(request.getRequestId())
+                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        for (final DataSnapshot child : dataSnapshot.getChildren()) {
 
-                            @Override
-                            public void onError(Object object) {
+                                            final String key =child.getKey();
+//                                    Toast.makeText(context, child.getKey(), Toast.LENGTH_SHORT).show();
+                                            Customer customer = new Customer();
+                                            customer.setAddress(request.getAddress());
+                                            customer.setDiscussion(request.getMessage());
+                                            customer.setMobile(request.getMobile());
+                                            customer.setName(request.getName());
+                                            customer.setStatus(Constant.STATUS_REQUEST_VISITED);
+                                            customer.setCustomerId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
+                                            customer.setCreatedDateTime(request.getCreatedDateTimeLong());
+                                            customer.setAttendedBy(SalesPerson.getText().toString());
 
-                            }
-                        });
+                                            userRepository.createCustomer(customer, new CallBack() {
+                                                @Override
+                                                public void onSuccess(Object object) {
+                                                    ref.child(key).removeValue();
+                                                    Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show();
+                                                    dialog.dismiss();
+                                                }
+
+                                                @Override
+                                                public void onError(Object object) {
+
+                                                }
+                                            });
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+
                     }
                 });
 
@@ -137,7 +166,7 @@ public class Sales_Customer_Verified_Requests_Adapter extends RecyclerView.Adapt
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView txtCustomerName, txtAddress, txtNumber, txtStatus;
-        CardView card_view,card_view_status;
+        CardView card_view, card_view_status;
 
         public ViewHolder(View itemView) {
             super(itemView);
