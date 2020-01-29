@@ -39,7 +39,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_margin="5dp"
-                        android:layout_weight="20"
+                        android:layout_weight="15"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -54,7 +54,7 @@
                             android:layout_height="wrap_content"
                             android:text="Customer Name "
                             android:textColor="@color/Black"
-                            android:layout_weight="60"
+                            android:layout_weight="50"
                             android:textSize="14dp" />
 
                             <TextView
@@ -62,7 +62,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Id:"
-                                android:layout_weight="40"
+                                android:layout_weight="50"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -79,7 +79,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Address"
-                            android:layout_weight="60"
+                            android:layout_weight="50"
                             android:textColor="@color/Black"
                             android:textSize="14dp" />
 
@@ -88,7 +88,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="C Name:"
-                                android:layout_weight="40"
+                                android:layout_weight="50"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -107,7 +107,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Mobile Number"
                                 android:textColor="@color/Black"
-                                android:layout_weight="60"
+                                android:layout_weight="50"
                                 android:textSize="14dp" />
 
                             <TextView
@@ -115,7 +115,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="Bank:"
-                                android:layout_weight="40"
+                                android:layout_weight="50"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -133,7 +133,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Status"
                                 android:textColor="@color/Black"
-                                android:layout_weight="60"
+                                android:layout_weight="50"
                                 android:textSize="14dp" />
 
                             <TextView
@@ -141,7 +141,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="LAP"
-                                android:layout_weight="40"
+                                android:layout_weight="50"
                                 android:textColor="@color/Black"
                                 android:textSize="14dp" />
 
@@ -158,7 +158,7 @@
                         android:layout_gravity="center"
                         android:layout_marginRight="3dp"
                         app:cardElevation="5dp"
-                        android:layout_weight="80"
+                        android:layout_weight="85"
                         card_view:cardCornerRadius="4dp">
 
                         <TextView

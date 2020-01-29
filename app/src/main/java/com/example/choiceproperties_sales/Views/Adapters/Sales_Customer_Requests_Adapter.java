@@ -97,8 +97,7 @@ public class Sales_Customer_Requests_Adapter extends RecyclerView.Adapter<Sales_
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 for (DataSnapshot child : dataSnapshot.getChildren()) {
 
-                                    Toast.makeText(context, child.getKey(), Toast.LENGTH_SHORT).show();
-                                    Log.d("User key", child.getKey());
+//                                    Toast.makeText(context, child.getKey(), Toast.LENGTH_SHORT).show();
                                     requests.setStatus(Constant.STATUS_REQUEST_VERIFIED);
                                     updateLeed( child.getKey(), requests.getLeedStatusMap1());
 
