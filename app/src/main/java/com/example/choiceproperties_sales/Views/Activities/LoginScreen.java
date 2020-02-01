@@ -35,7 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class LoginScreen extends AppCompatActivity {
     TextView txtregister;
-    Button login, Register;
+    Button login, Register,btnReset;
     EditText etMobileNumber, etpassword;
     private AppSharedPreference appSharedPreference;
     private UserRepository userRepository;
@@ -48,24 +48,27 @@ public class LoginScreen extends AppCompatActivity {
         activity = this;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
+
         userRepository = new UserRepositoryImpl(this);
         appSharedPreference = new AppSharedPreference(this);
         checkLoginState();
+
         Register = (Button) findViewById(R.id.buttonRegister);
         login = (Button) findViewById(R.id.buttonlogin);
+        btnReset = (Button) findViewById(R.id.btn_reset_password);
         etMobileNumber = (EditText) findViewById(R.id.edittext_mobile_number);
         etpassword = (EditText) findViewById(R.id.edittextpassword);
+
         Register.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(LoginScreen.this, Registeractivity.class);
                 startActivity(i);
                 overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
-//                overridePendingTransition(R.anim.backslide_in, R.anim.backslide_out);
             }
         });
         login.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                login();
                 login1();
             }
         });
@@ -81,6 +84,12 @@ public class LoginScreen extends AppCompatActivity {
                 Animation zoomOutAnimation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.zoomin);
                 etpassword.startAnimation(zoomOutAnimation);
                 return false;
+            }
+        });
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginScreen.this, ResetPasswordActivity.class));
             }
         });
     }
@@ -117,14 +126,14 @@ public class LoginScreen extends AppCompatActivity {
                         User user = postSnapshot.getValue(User.class);
 
                         progressDialog.dismissDialog();
-                        if (user.getStatus().equalsIgnoreCase(Constant.STATUS_ACTIVE)) {
+                        if (user.getStatus().equalsIgnoreCase(Constant.STATUS_ACTIVE) && user.getPassword().equalsIgnoreCase(etpassword.getText().toString())) {
                             String userid = user.getUserId();
                             appSharedPreference.createUserLoginSession();
                             appSharedPreference.addUserDetails(user);
                             Toast.makeText(LoginScreen.this, "Login Successfull", Toast.LENGTH_SHORT).show();
                             LoginToApp();
                         }else {
-                            Toast.makeText(LoginScreen.this, "Sorry Youe Account is Not Active", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginScreen.this, "Sorry Wrong Password or Your Account is Not Active", Toast.LENGTH_SHORT).show();
                         }
 
                         //                        signInUserData(userid);
