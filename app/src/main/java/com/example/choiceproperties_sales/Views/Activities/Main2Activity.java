@@ -13,15 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.choiceproperties_sales.R;
-import com.example.choiceproperties_sales.Views.Fragments.Admin_Sales__Tab_Fragment;
 import com.example.choiceproperties_sales.Views.Fragments.Fragment_Add_Customer;
-import com.example.choiceproperties_sales.Views.Fragments.Fragment_Add_Customers;
-import com.example.choiceproperties_sales.Views.Fragments.Fragment_Add_Plots;
-import com.example.choiceproperties_sales.Views.Fragments.Fragment_Reports;
-import com.example.choiceproperties_sales.Views.Fragments.Fragment_Sale_Plots;
-import com.example.choiceproperties_sales.Views.Fragments.Fragment_Sold_Out_Plots;
 import com.example.choiceproperties_sales.Views.Fragments.Requests__Tab_Fragment;
-import com.example.choiceproperties_sales.Views.Fragments.Sales_Customer_Requests_Fragment;
 import com.example.choiceproperties_sales.interfaces.OnFragmentInteractionListener;
 import com.example.choiceproperties_sales.preferences.AppSharedPreference;
 import com.google.firebase.auth.FirebaseAuth;

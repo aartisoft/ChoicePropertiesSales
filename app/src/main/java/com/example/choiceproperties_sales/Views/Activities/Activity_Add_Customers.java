@@ -145,7 +145,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
 
                         Customer customer = fillUserModel();
                         CreateCustomer(customer);
-                        
+
                     }
                 });
             }
@@ -225,6 +225,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
                 inputNote.setText("");
                 inputDateTime.setText("");
                 inputDiscussion.setText("");
+                imgCustomer.setImageResource(0);
                 progressDialogClass.dismissDialog();
             }
 
