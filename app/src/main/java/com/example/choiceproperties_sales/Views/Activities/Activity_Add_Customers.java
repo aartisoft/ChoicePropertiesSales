@@ -2,6 +2,7 @@ package com.example.choiceproperties_sales.Views.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -61,6 +62,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
     String Sdownloadurl;
 
     private static final int REQUEST_PICK_IMAGE = 1002;
+    private static final int RESULT_LOAD_IMAGE = 1;
     private StorageReference storageReference;
 
     ProgressDialogClass progressDialogClass;
@@ -111,18 +113,73 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
 
                 Upload();
 
-            }
-            else if (v == imgCustomer){
+            } else if (v == imgCustomer) {
 
                 pickImage();
-            }
-            else if (v == imgAttachment){
+            } else if (v == imgAttachment) {
 
-//                pickImage1();
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), RESULT_LOAD_IMAGE);
             }
 
 
         } catch (Exception e) {
+        }
+
+    }
+
+    public void pickImage() {
+        startActivityForResult(new Intent(this, ImagePickerActivity.class), REQUEST_PICK_IMAGE);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (data != null) {
+                switch (requestCode) {
+                    case REQUEST_PICK_IMAGE:
+
+                        Uri imagePath = Uri.parse(data.getStringExtra("image_path"));
+
+                        String str = imagePath.toString();
+                        String whatyouaresearching = str.substring(0, str.lastIndexOf("/"));
+                        image = whatyouaresearching.substring(whatyouaresearching.lastIndexOf("/") + 1, whatyouaresearching.length());
+                        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+                        File file = new File(root, image);
+
+                        filePath = Uri.fromFile(file);
+                        setImage(filePath);
+                        break;
+
+                    case RESULT_LOAD_IMAGE:
+                        if (data.getClipData() != null) {
+
+                            int totalItemsSelected = data.getClipData().getItemCount();
+
+                            for (int i = 0; i < totalItemsSelected; i++) {
+
+                                Uri fileUri = data.getClipData().getItemAt(i).getUri();
+                                fileDoneList.add(data.getClipData().getItemAt(i).getUri());
+
+                                //String fileName = getFileName(fileUri);
+                            }
+//                            uploadListAdapter = new UploadListAdapter(Activity_Add_Customers.this, fileDoneList);
+//                            imagesRecyclerView.setLayoutManager(new LinearLayoutManager(Activity_Add_Customers.this, LinearLayoutManager.HORIZONTAL, true));
+//                            imagesRecyclerView.setHasFixedSize(true);
+//                            imagesRecyclerView.setAdapter(uploadListAdapter);
+
+                        }
+                }
+            }
+        } else {
+
+            System.out.println("Failed to load image");
         }
 
     }
@@ -171,41 +228,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
         return mime.getExtensionFromMimeType(cR.getType(uri));
     }
 
-    public void pickImage() {
-        startActivityForResult(new Intent(this, ImagePickerActivity.class), REQUEST_PICK_IMAGE);
 
-    }
-
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            if (data != null) {
-                switch (requestCode) {
-                    case REQUEST_PICK_IMAGE:
-
-                        Uri imagePath = Uri.parse(data.getStringExtra("image_path"));
-
-                        String str = imagePath.toString();
-                        String whatyouaresearching = str.substring(0, str.lastIndexOf("/"));
-                        image = whatyouaresearching.substring(whatyouaresearching.lastIndexOf("/") + 1, whatyouaresearching.length());
-                        String root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
-                        File file = new File(root, image);
-
-                        filePath = Uri.fromFile(file);
-                        setImage(filePath);
-                        break;
-                }
-            }
-        } else {
-
-            System.out.println("Failed to load image");
-        }
-
-    }
 
     private void setImage(Uri imagePath) {
 
