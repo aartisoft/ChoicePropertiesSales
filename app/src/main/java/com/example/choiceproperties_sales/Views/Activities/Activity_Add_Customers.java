@@ -1,19 +1,21 @@
-package com.example.choiceproperties_sales.Views.Fragments;
+package com.example.choiceproperties_sales.Views.Activities;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -21,25 +23,21 @@ import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import com.bumptech.glide.Glide;
 import com.example.choiceproperties_sales.CallBack.CallBack;
 import com.example.choiceproperties_sales.Constant.Constant;
-import com.example.choiceproperties_sales.Exception.ExceptionUtil;
 import com.example.choiceproperties_sales.Models.Customer;
 import com.example.choiceproperties_sales.R;
-import com.example.choiceproperties_sales.Views.Activities.CropImageActivity;
-import com.example.choiceproperties_sales.Views.Activities.ImagePickerActivity;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties_sales.repository.UserRepository;
 import com.example.choiceproperties_sales.repository.impl.UserRepositoryImpl;
-import com.example.choiceproperties_sales.service.ImageCompressionService;
-import com.example.choiceproperties_sales.service.impl.ImageCompressionServiceImp;
-import com.example.choiceproperties_sales.utilities.FileUtils;
-import com.example.choiceproperties_sales.utilities.Utility;
-import com.theartofdev.edmodo.cropper.CropImageView;
+import com.google.android.gms.common.internal.Constants;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -48,10 +46,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import static android.app.Activity.RESULT_OK;
-
-
-public class Fragment_Add_Customers extends Fragment implements View.OnClickListener {
+public class Activity_Add_Customers extends AppCompatActivity implements View.OnClickListener {
 
     EditText inputName, inputMobile, inputNote, inputAddress, inputDateTime, inputDiscussion;
     Button btnAdd;
@@ -63,40 +58,36 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
     String image;
     private List<Uri> fileDoneList;
     private Uri filePath;
+    String Sdownloadurl;
 
-    private static final int RESULT_LOAD_IMAGE = 1;
-    private static final int REQUEST_CROP_IMAGE = 2342;
     private static final int REQUEST_PICK_IMAGE = 1002;
+    private StorageReference storageReference;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    }
+        setContentView(R.layout.activity__add__customers);
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_add_customers, container, false);
-
-        userRepository = new UserRepositoryImpl(getActivity());
+        userRepository = new UserRepositoryImpl();
 //        leedRepository = new LeedRepositoryImpl();
-        progressDialogClass = new ProgressDialogClass(getActivity());
+        progressDialogClass = new ProgressDialogClass(this);
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         fileDoneList = new ArrayList<>();
 
-        inputName = (EditText) view.findViewById(R.id.username);
-        inputMobile = (EditText) view.findViewById(R.id.mobilenumber);
-        inputNote = (EditText) view.findViewById(R.id.note);
-        inputAddress = (EditText) view.findViewById(R.id.address);
-        inputDateTime = (EditText) view.findViewById(R.id.date_time);
-        inputDiscussion = (EditText) view.findViewById(R.id.discussion);
-        btnAdd = (Button) view.findViewById(R.id.add_button);
+        inputName = (EditText) findViewById(R.id.username);
+        inputMobile = (EditText) findViewById(R.id.mobilenumber);
+        inputNote = (EditText) findViewById(R.id.note);
+        inputAddress = (EditText) findViewById(R.id.address);
+        inputDateTime = (EditText) findViewById(R.id.date_time);
+        inputDiscussion = (EditText) findViewById(R.id.discussion);
+        btnAdd = (Button) findViewById(R.id.add_button);
 
-        imgCustomer = (ImageView) view.findViewById(R.id.iv_customerImage);
-        imgAttachment = (ImageView) view.findViewById(R.id.attachment);
+        imgCustomer = (ImageView) findViewById(R.id.iv_customerImage);
+        imgAttachment = (ImageView) findViewById(R.id.attachment);
 
         btnAdd.setOnClickListener(this);
         imgCustomer.setOnClickListener(this);
@@ -109,7 +100,6 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
             }
         });
 
-        return view;
     }
 
     @Override
@@ -118,13 +108,17 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         try {
 
             if (v == btnAdd) {
-                progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
-                Customer customer = fillUserModel();
-                CreateCustomer(customer);
+
+                Upload();
+
             }
             else if (v == imgCustomer){
 
                 pickImage();
+            }
+            else if (v == imgAttachment){
+
+//                pickImage1();
             }
 
 
@@ -133,10 +127,57 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
 
     }
 
+    private void Upload() {
+        final ProgressDialog progressDialog = new ProgressDialog(Activity_Add_Customers.this);
+        progressDialog.setTitle("Uploading");
+        progressDialog.show();
+
+        final StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_UPLOADS + System.currentTimeMillis() + "." + getFileExtension(filePath));
+        sRef.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                progressDialog.dismiss();
+
+                sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Sdownloadurl = uri.toString();
+
+                        Customer customer = fillUserModel();
+                        CreateCustomer(customer);
+                        
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                progressDialog.dismiss();
+                Toast.makeText(Activity_Add_Customers.this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                //displaying the upload progress
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+            }
+        });
+    }
+
+    public String getFileExtension(Uri uri) {
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
+    }
+
     public void pickImage() {
-        startActivityForResult(new Intent(getActivity(), ImagePickerActivity.class), REQUEST_PICK_IMAGE);
+        startActivityForResult(new Intent(this, ImagePickerActivity.class), REQUEST_PICK_IMAGE);
 
     }
+
+
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -168,14 +209,16 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
 
     private void setImage(Uri imagePath) {
 
+//        Glide.with(getApplicationContext()).load(imagePath).placeholder(R.drawable.loading).into(imgCustomer);
         imgCustomer.setImageURI(imagePath);
+
     }
 
     private void CreateCustomer(Customer customer) {
         userRepository.createCustomer(customer, new CallBack() {
             @Override
             public void onSuccess(Object object) {
-                Toast.makeText(getContext(), "Customer Added Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Customer Added Successfully", Toast.LENGTH_SHORT).show();
                 inputName.setText("");
                 inputMobile.setText("");
                 inputAddress.setText("");
@@ -202,6 +245,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         customer.setAttendedBy(inputNote.getText().toString());
         customer.setDateTime(inputDateTime.getText().toString());
         customer.setDiscussion(inputDiscussion.getText().toString());
+        customer.setCustomerImage(String.valueOf(Sdownloadurl));
         customer.setStatus(Constant.STATUS_REQUEST_VISITED);
         customer.setCustomerId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
 
@@ -211,7 +255,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();
-        mDatePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+        mDatePickerDialog = new DatePickerDialog(Activity_Add_Customers.this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -230,7 +274,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
                 mMinute = c.get(Calendar.MINUTE);
 
                 // Launch Time Picker Dialog
-                TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(),
+                TimePickerDialog timePickerDialog = new TimePickerDialog(Activity_Add_Customers.this,
                         new TimePickerDialog.OnTimeSetListener() {
 
                             @Override
@@ -250,7 +294,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
-                = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }

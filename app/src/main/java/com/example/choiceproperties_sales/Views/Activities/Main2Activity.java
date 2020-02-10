@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.choiceproperties_sales.R;
 import com.example.choiceproperties_sales.Views.Fragments.Admin_Sales__Tab_Fragment;
+import com.example.choiceproperties_sales.Views.Fragments.Fragment_Add_Customer;
 import com.example.choiceproperties_sales.Views.Fragments.Fragment_Add_Customers;
 import com.example.choiceproperties_sales.Views.Fragments.Fragment_Add_Plots;
 import com.example.choiceproperties_sales.Views.Fragments.Fragment_Reports;
@@ -48,7 +49,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
 
         Boolean per = isStoragePermissionGranted();
         if (per){
-            //   Toast.makeText(this, "Storage Premission Granted", Toast.LENGTH_SHORT).show();
+               Toast.makeText(this, "Storage Premission Granted", Toast.LENGTH_SHORT).show();
         }else {
 //            Toast.makeText(this, "Storage Premission Required", Toast.LENGTH_SHORT).show();
         }
@@ -90,7 +91,7 @@ public class Main2Activity extends AppCompatActivity implements OnFragmentIntera
                     }
                     case 1:{
                         color1 = R.color.orange;
-                        fragmentClass = Fragment_Add_Customers.class;
+                        fragmentClass = Fragment_Add_Customer.class;
 
                         break;
                     }
