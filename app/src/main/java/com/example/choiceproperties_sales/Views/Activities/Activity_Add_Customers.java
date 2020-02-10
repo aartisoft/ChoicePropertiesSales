@@ -60,7 +60,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
     int mMinute;
     String image;
     private List<Uri> fileDoneList;
-    private List<String> fileDoneList1;
+    private ArrayList<String> fileDoneList1;
     private Uri filePath;
     String Sdownloadurl;
     CustomerDocumentAdapter customerDocumentAdapter;
@@ -329,6 +329,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
         customer.setDateTime(inputDateTime.getText().toString());
         customer.setDiscussion(inputDiscussion.getText().toString());
         customer.setCustomerImage(String.valueOf(Sdownloadurl));
+        customer.setDocuments(fileDoneList1);
         customer.setStatus(Constant.STATUS_REQUEST_VISITED);
         customer.setCustomerId(Constant.CUSTOMERS_TABLE_REF.push().getKey());
 

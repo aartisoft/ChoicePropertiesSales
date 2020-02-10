@@ -7,6 +7,7 @@ import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ServerValue;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ public class Customer implements Serializable {
     private String status;
     private String customerImage;
     private Long createdDateTime;
+    private ArrayList<String> documents;
 
 
     //empty constructor is neaded
@@ -113,6 +115,14 @@ public class Customer implements Serializable {
         this.customerImage = customerImage;
     }
 
+    public ArrayList<String> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(ArrayList<String> documents) {
+        this.documents = documents;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -125,6 +135,7 @@ public class Customer implements Serializable {
         result.put("customerId", customerId);
         result.put("status", status);
         result.put("customerImage", customerImage);
+        result.put("documents", getDocuments());
         result.put("createdDateTime", getCreatedDateTime());
 
         return result;
