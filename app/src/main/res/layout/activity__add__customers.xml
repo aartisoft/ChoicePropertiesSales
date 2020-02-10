@@ -179,6 +179,14 @@
                         android:textColor="@android:color/white"
                         android:textStyle="bold" />
 
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_view_users"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>

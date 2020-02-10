@@ -3,6 +3,7 @@ package com.example.choiceproperties_sales.Views.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -29,6 +30,7 @@ import com.example.choiceproperties_sales.CallBack.CallBack;
 import com.example.choiceproperties_sales.Constant.Constant;
 import com.example.choiceproperties_sales.Models.Customer;
 import com.example.choiceproperties_sales.R;
+import com.example.choiceproperties_sales.Views.Adapters.CustomerDocumentAdapter;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties_sales.repository.UserRepository;
 import com.example.choiceproperties_sales.repository.impl.UserRepositoryImpl;
@@ -60,8 +62,11 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
     private List<Uri> fileDoneList;
     private Uri filePath;
     String Sdownloadurl;
+    CustomerDocumentAdapter customerDocumentAdapter;
+    RecyclerView recycleDocuments;
 
     private static final int REQUEST_PICK_IMAGE = 1002;
+    private static final int REQUEST_CROP_IMAGE = 2342;
     private static final int RESULT_LOAD_IMAGE = 1;
     private StorageReference storageReference;
 
@@ -90,6 +95,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
 
         imgCustomer = (ImageView) findViewById(R.id.iv_customerImage);
         imgAttachment = (ImageView) findViewById(R.id.attachment);
+        recycleDocuments = (RecyclerView) findViewById(R.id.recycler_view_users);
 
         btnAdd.setOnClickListener(this);
         imgCustomer.setOnClickListener(this);
@@ -169,10 +175,12 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
 
                                 //String fileName = getFileName(fileUri);
                             }
-//                            uploadListAdapter = new UploadListAdapter(Activity_Add_Customers.this, fileDoneList);
-//                            imagesRecyclerView.setLayoutManager(new LinearLayoutManager(Activity_Add_Customers.this, LinearLayoutManager.HORIZONTAL, true));
-//                            imagesRecyclerView.setHasFixedSize(true);
-//                            imagesRecyclerView.setAdapter(uploadListAdapter);
+                            customerDocumentAdapter = new CustomerDocumentAdapter(Activity_Add_Customers.this, fileDoneList);
+                            recycleDocuments.setLayoutManager(new LinearLayoutManager(Activity_Add_Customers.this, LinearLayoutManager.HORIZONTAL, true));
+                            recycleDocuments.setHasFixedSize(true);
+                            recycleDocuments.setAdapter(customerDocumentAdapter);
+
+                        } else if (data.getData() != null) {
 
                         }
                 }
