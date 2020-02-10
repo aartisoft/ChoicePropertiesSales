@@ -3,15 +3,20 @@ package com.example.choiceproperties_sales.Views.Fragments;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -20,25 +25,35 @@ import androidx.fragment.app.Fragment;
 
 import com.example.choiceproperties_sales.CallBack.CallBack;
 import com.example.choiceproperties_sales.Constant.Constant;
+import com.example.choiceproperties_sales.Exception.ExceptionUtil;
 import com.example.choiceproperties_sales.Models.Customer;
 import com.example.choiceproperties_sales.R;
 import com.example.choiceproperties_sales.Views.dialog.ProgressDialogClass;
 import com.example.choiceproperties_sales.repository.UserRepository;
 import com.example.choiceproperties_sales.repository.impl.UserRepositoryImpl;
+import com.example.choiceproperties_sales.service.ImageCompressionService;
+import com.example.choiceproperties_sales.service.impl.ImageCompressionServiceImp;
+import com.example.choiceproperties_sales.utilities.FileUtils;
+import com.example.choiceproperties_sales.utilities.Utility;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class Fragment_Add_Customers extends Fragment implements View.OnClickListener {
 
     EditText inputName, inputMobile, inputNote, inputAddress, inputDateTime, inputDiscussion;
     Button btnAdd;
+    ImageView imgCustomer, imgAttachment;
     private DatePickerDialog mDatePickerDialog;
     String fdate;
     int mHour;
     int mMinute;
+    Bitmap bitmap;
 
     ProgressDialogClass progressDialogClass;
     UserRepository userRepository;
@@ -65,6 +80,9 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         inputDiscussion = (EditText) view.findViewById(R.id.discussion);
         btnAdd = (Button) view.findViewById(R.id.add_button);
 
+        imgCustomer = (ImageView) view.findViewById(R.id.iv_customerImage);
+        imgAttachment = (ImageView) view.findViewById(R.id.attachment);
+
         btnAdd.setOnClickListener(this);
         setDateTimeField();
         inputDateTime.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +91,8 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
                 mDatePickerDialog.show();
             }
         });
-        return view;
 
+        return view;
     }
 
     @Override
@@ -83,7 +101,7 @@ public class Fragment_Add_Customers extends Fragment implements View.OnClickList
         try {
 
             if (v == btnAdd) {
-                progressDialogClass.showDialog(this.getString(R.string.loading),this.getString(R.string.PLEASE_WAIT));
+                progressDialogClass.showDialog(this.getString(R.string.loading), this.getString(R.string.PLEASE_WAIT));
                 Customer customer = fillUserModel();
                 CreateCustomer(customer);
             }

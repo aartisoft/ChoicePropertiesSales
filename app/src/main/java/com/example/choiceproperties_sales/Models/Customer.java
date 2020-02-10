@@ -20,6 +20,7 @@ public class Customer implements Serializable {
     private String discussion;
     private String customerId;
     private String status;
+    private String customerImage;
     private Long createdDateTime;
 
 
@@ -104,6 +105,14 @@ public class Customer implements Serializable {
         this.status = status;
     }
 
+    public String getCustomerImage() {
+        return customerImage;
+    }
+
+    public void setCustomerImage(String customerImage) {
+        this.customerImage = customerImage;
+    }
+
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -115,6 +124,7 @@ public class Customer implements Serializable {
         result.put("discussion", discussion);
         result.put("customerId", customerId);
         result.put("status", status);
+        result.put("customerImage", customerImage);
         result.put("createdDateTime", getCreatedDateTime());
 
         return result;
