@@ -60,6 +60,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
     int mMinute;
     String image;
     private List<Uri> fileDoneList;
+    private List<String> fileDoneList1;
     private Uri filePath;
     String Sdownloadurl;
     CustomerDocumentAdapter customerDocumentAdapter;
@@ -84,6 +85,7 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
         storageReference = FirebaseStorage.getInstance().getReference();
 
         fileDoneList = new ArrayList<>();
+        fileDoneList1 = new ArrayList<>();
 
         inputName = (EditText) findViewById(R.id.username);
         inputMobile = (EditText) findViewById(R.id.mobilenumber);
@@ -207,9 +209,63 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
                     @Override
                     public void onSuccess(Uri uri) {
                         Sdownloadurl = uri.toString();
+                        if (fileDoneList != null) {
+                            //displaying progress dialog while image is uploading
+                            final ProgressDialog progressDialog = new ProgressDialog(Activity_Add_Customers.this);
+                            progressDialog.setTitle("Uploading");
+                            progressDialog.show();
 
-                        Customer customer = fillUserModel();
-                        CreateCustomer(customer);
+                            for (int i = 0; i < fileDoneList.size(); i++) {
+
+                                //getting the storage reference
+                                final StorageReference sRef = storageReference.child(Constant.STORAGE_PATH_DOCUMENTS + System.currentTimeMillis() + "." + getFileExtension(fileDoneList.get(i)));
+
+                                //adding the file to reference
+                                sRef.putFile(fileDoneList.get(i))
+                                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                //dismissing the progress dialog
+                                                progressDialog.dismiss();
+
+                                                //displaying success toast
+                                                Toast.makeText(getApplicationContext(), "File Uploaded ", Toast.LENGTH_LONG).show();
+                                                sRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                                    @Override
+                                                    public void onSuccess(Uri uri) {
+                                                        String downloadurl = uri.toString();
+                                                        fileDoneList1.add(downloadurl);
+                                                        if (fileDoneList.size() == fileDoneList1.size()) {
+                                                            Customer customer = fillUserModel();
+                                                            CreateCustomer(customer);
+                                                        }
+
+
+                                                    }
+                                                });
+
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception exception) {
+                                                progressDialog.dismiss();
+                                                Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                                            }
+                                        })
+                                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                                            @Override
+                                            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                                                //displaying the upload progress
+                                                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                                                progressDialog.setMessage("Uploaded " + ((int) progress) + "%...");
+                                            }
+                                        });
+                            }
+                        } else {
+                            //display an error if no file is selected
+                            Toast.makeText(getApplicationContext(), "Please Select a file", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
                 });

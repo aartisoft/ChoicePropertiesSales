@@ -51,6 +51,7 @@ public class Constant {
     public static final String CUSROMER_PROFILE_PATH = "images/customer";
     public static final String IMAGE_URI_LIST = "IMAGE_URI_LIST";
     public static final String STORAGE_PATH_UPLOADS = "Customers/";
+    public static final String STORAGE_PATH_DOCUMENTS = "Documents/";
 
     public static final String ROLE_SALES = "SALES";
     public static final String STATUS_ACTIVE = "ACTIVE";
