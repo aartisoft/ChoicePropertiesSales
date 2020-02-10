@@ -306,13 +306,8 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
             @Override
             public void onSuccess(Object object) {
                 Toast.makeText(getApplicationContext(), "Customer Added Successfully", Toast.LENGTH_SHORT).show();
-                inputName.setText("");
-                inputMobile.setText("");
-                inputAddress.setText("");
-                inputNote.setText("");
-                inputDateTime.setText("");
-                inputDiscussion.setText("");
-                imgCustomer.setImageResource(0);
+             Intent intent = new Intent(Activity_Add_Customers.this,Activity_Add_Customers.class);
+             startActivity(intent);
                 progressDialogClass.dismissDialog();
             }
 
