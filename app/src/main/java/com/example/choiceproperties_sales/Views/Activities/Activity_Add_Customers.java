@@ -75,9 +75,18 @@ public class Activity_Add_Customers extends AppCompatActivity implements View.On
     UserRepository userRepository;
 
     @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__add__customers);
+
+        assert getSupportActionBar() != null;   //null check
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         userRepository = new UserRepositoryImpl();
 //        leedRepository = new LeedRepositoryImpl();
